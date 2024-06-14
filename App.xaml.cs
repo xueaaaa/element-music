@@ -1,4 +1,5 @@
-﻿using ElementMusic.Services;
+﻿using ElementMusic.Models;
+using ElementMusic.Services;
 using ElementMusic.ViewModels.Pages;
 using ElementMusic.ViewModels.Windows;
 using ElementMusic.Views.Pages;
@@ -6,6 +7,7 @@ using ElementMusic.Views.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
@@ -18,11 +20,6 @@ namespace ElementMusic
     /// </summary>
     public partial class App
     {
-        // The.NET Generic Host provides dependency injection, configuration, logging, and other services.
-        // https://docs.microsoft.com/dotnet/core/extensions/generic-host
-        // https://docs.microsoft.com/dotnet/core/extensions/dependency-injection
-        // https://docs.microsoft.com/dotnet/core/extensions/configuration
-        // https://docs.microsoft.com/dotnet/core/extensions/logging
         private static readonly IHost _host = Host
             .CreateDefaultBuilder()
             .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
@@ -67,6 +64,9 @@ namespace ElementMusic
         private void OnStartup(object sender, StartupEventArgs e)
         {
             _host.Start();
+
+            Localizator.AddLang(new CultureInfo("en"));
+            Localizator.AddLang(new CultureInfo("ru"));
         }
 
         /// <summary>
@@ -82,9 +82,6 @@ namespace ElementMusic
         /// <summary>
         /// Occurs when an exception is thrown by an application but not handled.
         /// </summary>
-        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0
-        }
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) { }
     }
 }

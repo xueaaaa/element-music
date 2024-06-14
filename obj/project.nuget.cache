@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "s35nQCWyCsBWldZWa8BwRb85JRLOc+85wTm3eKtToF5eLD61AMT8w7vaupEUfCaPpZ+Gnl3EwO9Y8pqgNCLJgg==",
+  "dgSpecHash": "VUCdiEmf+qJ+ZepKQ6oSja97UFoaoJDFzAeYaVC3kEWS1A5Sx40KIJuPsEn2/xHlRPYWTSSXq14N/jyypzVGiA==",
   "success": true,
   "projectFilePath": "D:\\C#\\ElementMusic\\ElementMusic.csproj",
   "expectedPackageFiles": [
@@ -36,8 +36,7 @@
     "C:\\Users\\GamePC\\.nuget\\packages\\system.diagnostics.eventlog\\8.0.0\\system.diagnostics.eventlog.8.0.0.nupkg.sha512",
     "C:\\Users\\GamePC\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\GamePC\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
-    "C:\\Users\\GamePC\\.nuget\\packages\\wpf-ui\\3.0.4\\wpf-ui.3.0.4.nupkg.sha512",
-    "C:\\Users\\GamePC\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.29\\microsoft.windows.sdk.net.ref.10.0.17763.29.nupkg.sha512"
+    "C:\\Users\\GamePC\\.nuget\\packages\\wpf-ui\\3.0.4\\wpf-ui.3.0.4.nupkg.sha512"
   ],
   "logs": []
 }

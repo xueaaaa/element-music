@@ -9,8 +9,7 @@ namespace ElementMusic.Views.Windows
     {
         public MainWindowViewModel ViewModel { get; }
 
-        public MainWindow(MainWindowViewModel viewModel, IPageService pageService, INavigationService navigationService
-        )
+        public MainWindow(MainWindowViewModel viewModel, IPageService pageService, INavigationService navigationService)
         {
             ViewModel = viewModel;
             DataContext = this;

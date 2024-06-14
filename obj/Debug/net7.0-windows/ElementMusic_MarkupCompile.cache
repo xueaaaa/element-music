@@ -1,10 +1,10 @@
 ﻿ElementMusic
-1.0.0.0
+
 
 winexe
 C#
 .cs
-D:\C#\ElementMusic\obj\Debug\net7.0-windows10.0.17763.0\
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\
 ElementMusic
 none
 false
@@ -12,8 +12,8 @@ TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 D:\C#\ElementMusic\App.xaml
 4-994352197
 
-15-1818454542
-229-617528977
+131216874661
+227-1172065473
 Resources\Locales\Locale.xaml;Resources\Locales\ru.Locale.xaml;Views\Pages\SettingsPage.xaml;Views\Windows\MainWindow.xaml;
 resources\icons\favicon.ico
 False

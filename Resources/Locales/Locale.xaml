@@ -2,4 +2,6 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <v:String x:Key="MainPageTitle">Main</v:String>
+    <v:String x:Key="FavoritesPageTitle">Favorites</v:String>
+    <v:String x:Key="SettingsPageTitle">Settings</v:String>
 </ResourceDictionary>

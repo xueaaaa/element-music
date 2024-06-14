@@ -37,9 +37,15 @@
                 <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42 32 42 20" />
             </ui:NavigationView.Header>
             <ui:NavigationView.MenuItems>
-                <ui:MenuItem Header="Главная"
+                <ui:MenuItem Header="{DynamicResource MainPageTitle}"
                              Icon="{ui:SymbolIcon Home24}"/>
+                <ui:MenuItem Header="{DynamicResource FavoritesPageTitle}"
+                             Icon="{ui:SymbolIcon Heart24}"/>
             </ui:NavigationView.MenuItems>
+            <ui:NavigationView.FooterMenuItems>
+                <ui:MenuItem Header="{DynamicResource SettingsPageTitle}"
+                             Icon="{ui:SymbolIcon Settings24}"/>
+            </ui:NavigationView.FooterMenuItems>
             <ui:NavigationView.ContentOverlay>
                 <Grid>
                     <ui:SnackbarPresenter x:Name="SnackbarPresenter" />
