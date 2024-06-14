@@ -4,4 +4,14 @@
     <v:String x:Key="MainPageTitle">Главная</v:String>
     <v:String x:Key="FavoritesPageTitle">Избранное</v:String>
     <v:String x:Key="SettingsPageTitle">Настройки</v:String>
+
+    <v:String x:Key="PersonalizationGroupHeader">Персонализация</v:String>
+    <v:String x:Key="ThemeGroupName">Тема</v:String>
+    <v:String x:Key="LightThemeName">Светлая</v:String>
+    <v:String x:Key="DarkThemeName">Тёмная</v:String>
+    <v:String x:Key="LanguageGroupName">Язык</v:String>
+    <v:String x:Key="AboutHeader">Об Element Music</v:String>
+    <v:String x:Key="VersionLabel">Версия приложения</v:String>
+    <v:String x:Key="ApplicationAuthorLabel">Разработчик приложения</v:String>
+    <v:String x:Key="ElementAuthorLabel">Разработчик сети Element</v:String>
 </ResourceDictionary>

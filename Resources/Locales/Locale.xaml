@@ -4,4 +4,14 @@
     <v:String x:Key="MainPageTitle">Main</v:String>
     <v:String x:Key="FavoritesPageTitle">Favorites</v:String>
     <v:String x:Key="SettingsPageTitle">Settings</v:String>
+
+    <v:String x:Key="PersonalizationGroupHeader">Personalization</v:String>
+    <v:String x:Key="ThemeGroupName">Theme</v:String>
+    <v:String x:Key="LightThemeName">Light</v:String>
+    <v:String x:Key="DarkThemeName">Dark</v:String>
+    <v:String x:Key="LanguageGroupName">Language</v:String>
+    <v:String x:Key="AboutHeader">About Element Music</v:String>
+    <v:String x:Key="VersionLabel">Application Version</v:String>
+    <v:String x:Key="ApplicationAuthorLabel">Application Developer</v:String>
+    <v:String x:Key="ElementAuthorLabel">Developer of the Element network</v:String>
 </ResourceDictionary>

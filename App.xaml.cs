@@ -1,4 +1,5 @@
 ﻿using ElementMusic.Models;
+using ElementMusic.Properties;
 using ElementMusic.Services;
 using ElementMusic.ViewModels.Pages;
 using ElementMusic.ViewModels.Windows;
@@ -63,10 +64,21 @@ namespace ElementMusic
         /// </summary>
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            _host.Start();
-
             Localizator.AddLang(new CultureInfo("en"));
             Localizator.AddLang(new CultureInfo("ru"));
+
+            Localizator.LanguageChanged += (_, _) =>
+            {
+                Settings.Default.Language = Localizator.CurrentLanguage;
+                Settings.Default.Save();
+            };
+
+            var lang = Settings.Default.Language;
+            Localizator.CurrentLanguage = lang == null ?
+                Settings.Default.DefaultLanguage :
+                lang;
+
+            _host.Start();
         }
 
         /// <summary>

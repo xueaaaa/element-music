@@ -42,7 +42,7 @@ namespace ElementMusic.Models
 
                 // Search for the dictionary of the previous locale
                 ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.Where(d =>
-                d.Source != null && d.Source.OriginalString.EndsWith("Resources/Locales/Locale.")).First();
+                d.Source != null && d.Source.OriginalString.EndsWith("Locale.xaml")).First();
 
                 if (oldDictionary != null)
                 {
