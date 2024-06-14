@@ -5,6 +5,7 @@
                  xmlns:local="clr-namespace:ElementMusic.Views.Windows"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 xmlns:h="clr-namespace:ElementMusic.Helpers"
                  Title="Element Music"
                  Width="1100"
                  Height="650"
@@ -20,6 +21,10 @@
                  WindowCornerPreference="Round"
                  WindowStartupLocation="CenterScreen"
                  mc:Ignorable="d">
+    <ui:FluentWindow.Resources>
+        <h:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <h:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+    </ui:FluentWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,6 +32,7 @@
         </Grid.RowDefinitions>
         <ui:NavigationView x:Name="RootNavigation"
                            Grid.Row="1"
+                           Visibility="{Binding ViewModel.IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
                            Padding="42 0 42 0"
                            BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
                            FrameMargin="0"
@@ -52,6 +58,29 @@
                 </Grid>
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
+
+        <ui:Card Grid.Row="1"
+                 Visibility="{Binding ViewModel.IsAuthorized, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+            <StackPanel>
+                <ui:TextBlock FontTypography="Title"
+                              Text="{DynamicResource LoginCardHeader}"/>
+                <ui:TextBlock Margin="0 12 0 24"
+                              FontTypography="Caption"
+                              Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
+                              Text="{DynamicResource LoginCardLabel}"/>
+                <ui:TextBox Icon="{ui:SymbolIcon Mail24}"
+                            PlaceholderText="{DynamicResource EmailPlaceholder}"/>
+                <ui:PasswordBox Margin="0 8 0 24"
+                                Icon="{ui:SymbolIcon Password24}"
+                                PlaceholderText="{DynamicResource PasswordPlaceholder}" Cursor="IBeam"/>
+
+                <ui:Button Appearance="Primary"
+                           HorizontalAlignment="Center"
+                           Content="{DynamicResource LoginCardHeader}"/>
+            </StackPanel>
+        </ui:Card>
 
         <ContentPresenter x:Name="RootContentDialog"
                           Grid.Row="0"

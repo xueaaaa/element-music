@@ -51,7 +51,7 @@ namespace ElementMusic.Services
                 _navigationWindow!.ShowWindow();
 
                 // Default Opening Page
-                _navigationWindow.Navigate(typeof(Views.Pages.SettingsPage));
+                // _navigationWindow.Navigate(typeof(Views.Pages.SettingsPage));
             }
 
             await Task.CompletedTask;

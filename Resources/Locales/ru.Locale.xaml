@@ -5,6 +5,11 @@
     <v:String x:Key="FavoritesPageTitle">Избранное</v:String>
     <v:String x:Key="SettingsPageTitle">Настройки</v:String>
 
+    <v:String x:Key="LoginCardHeader">Вход</v:String>
+    <v:String x:Key="LoginCardLabel">Для использования Element Music сначала необходимо авторизоваться под своей учётной записью в сети Element.</v:String>
+    <v:String x:Key="EmailPlaceholder">Адрес электронной почты...</v:String>
+    <v:String x:Key="PasswordPlaceholder">Пароль...</v:String>
+
     <v:String x:Key="PersonalizationGroupHeader">Персонализация</v:String>
     <v:String x:Key="ThemeGroupName">Тема</v:String>
     <v:String x:Key="LightThemeName">Светлая</v:String>

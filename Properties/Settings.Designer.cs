@@ -46,5 +46,17 @@ namespace ElementMusic.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AuthorizationToken {
+            get {
+                return ((string)(this["AuthorizationToken"]));
+            }
+            set {
+                this["AuthorizationToken"] = value;
+            }
+        }
     }
 }
