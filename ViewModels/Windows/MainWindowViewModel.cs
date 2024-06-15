@@ -43,10 +43,18 @@ namespace ElementMusic.ViewModels.Windows
 
         public MainWindowViewModel()
         {
-            IsAuthorized = Properties.Settings.Default.SessionKey == string.Empty ?
-                false : true;
-            Email = string.Empty;
-            Password = string.Empty;
+            if (Properties.Settings.Default.LastAuthorizationDay.AddDays(3) < DateTime.Now)
+                IsAuthorized = false;
+            else if(Properties.Settings.Default.SessionKey == string.Empty) 
+                IsAuthorized = false;
+            else IsAuthorized = true;
+
+            Email = Properties.Settings.Default.Email;
+            Password = Properties.Settings.Default.Password;
+
+            if (!IsAuthorized && Properties.Settings.Default.Email != string.Empty)
+                Login(null);
+
             SaveData = true;
 
             Properties.Settings.Default.PropertyChanged += (o, e) =>
@@ -63,14 +71,17 @@ namespace ElementMusic.ViewModels.Windows
             var results = new List<ValidationResult>();
 
             if (!Validator.TryValidateValue(
-                _email, 
-                new ValidationContext(_email), 
-                results, 
-                new List<ValidationAttribute> 
-                { 
-                    new EmailAddressAttribute() 
+                _email,
+                new ValidationContext(_email),
+                results,
+                new List<ValidationAttribute>
+                {
+                    new EmailAddressAttribute()
                 }))
+            {
                 InfoBarViewModel.ErrorTemplate($"{Application.Current.Resources["IncorrectEmailError"]}: \n{results[0].ErrorMessage}");
+                return;
+            }
 
             HttpResponseMessage? msg = await App.APISender.SendRequest("Authorization.php?F=LOGIN", HttpMethod.Post, new Dictionary<string, object>
             {
@@ -82,7 +93,13 @@ namespace ElementMusic.ViewModels.Windows
 
             if (resp.Type == ServerResponse.ERROR_TYPE)
                 InfoBarViewModel.ErrorTemplate(resp.Content);
-            else Properties.Settings.Default.SessionKey = resp.Content;
+            else
+            {
+                Properties.Settings.Default.SessionKey = resp.Content;
+                Properties.Settings.Default.Email = SaveData ? Email : string.Empty;
+                Properties.Settings.Default.Password = SaveData ? Password : string.Empty;
+                Properties.Settings.Default.LastAuthorizationDay = DateTime.Now;    
+            }
         }
     }
 }

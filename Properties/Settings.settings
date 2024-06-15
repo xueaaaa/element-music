@@ -11,5 +11,14 @@
     <Setting Name="SessionKey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Email" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastAuthorizationDay" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2024-06-15</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

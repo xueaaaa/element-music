@@ -6,6 +6,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  xmlns:h="clr-namespace:ElementMusic.Helpers"
+                 xmlns:pages="clr-namespace:ElementMusic.Views.Pages"
                  Title="Element Music"
                  Width="1100"
                  Height="650"
@@ -39,19 +40,20 @@
                            FrameMargin="0"
                            IsBackButtonVisible="Visible"
                            IsPaneToggleVisible="True"
-                           PaneDisplayMode="LeftFluent">
+                           PaneDisplayMode="Left">
             <ui:NavigationView.Header>
                 <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42 32 42 20" />
             </ui:NavigationView.Header>
             <ui:NavigationView.MenuItems>
-                <ui:MenuItem Header="{DynamicResource MainPageTitle}"
-                             Icon="{ui:SymbolIcon Home24}"/>
-                <ui:MenuItem Header="{DynamicResource FavoritesPageTitle}"
-                             Icon="{ui:SymbolIcon Heart24}"/>
+                <ui:NavigationViewItem Content="{DynamicResource MainPageTitle}"
+                                       Icon="{ui:SymbolIcon Home24}"/>
+                <ui:NavigationViewItem Content="{DynamicResource FavoritesPageTitle}"
+                                       Icon="{ui:SymbolIcon Heart24}"/>
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
-                <ui:MenuItem Header="{DynamicResource SettingsPageTitle}"
-                             Icon="{ui:SymbolIcon Settings24}"/>
+                <ui:NavigationViewItem Content="{DynamicResource SettingsPageTitle}"
+                                       Icon="{ui:SymbolIcon Settings24}"
+                                       TargetPageType="{x:Type pages:SettingsPage}"/>
             </ui:NavigationView.FooterMenuItems>
             <ui:NavigationView.ContentOverlay>
                 <Grid>
