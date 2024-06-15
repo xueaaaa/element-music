@@ -63,3 +63,7 @@ D:\C#\ElementMusic\obj\Debug\net7.0-windows\refint\ElementMusic.dll
 D:\C#\ElementMusic\obj\Debug\net7.0-windows\ElementMusic.pdb
 D:\C#\ElementMusic\obj\Debug\net7.0-windows\ElementMusic.genruntimeconfig.cache
 D:\C#\ElementMusic\obj\Debug\net7.0-windows\ref\ElementMusic.dll
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Pages\MainPage.g.cs
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Pages\MainPage.baml
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Controls\SongCard.g.cs
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Controls\SongCard.baml

@@ -28,17 +28,18 @@ namespace ElementMusic.Models.ElementAPI
             _httpClient.Dispose();
         }
 
-        public async Task<HttpResponseMessage?> SendRequest(string endpoint, HttpMethod method, Dictionary<string, object> parameters)
+        public async Task<HttpResponseMessage?> SendRequest(string endpoint, HttpMethod method, Dictionary<string, object> parameters = null)
         {
             using (var formData = new MultipartFormDataContent())
             {
-                foreach (var item in parameters)
-                {
-                    if (item.Value is string s)
-                        formData.Add(new StringContent(s), item.Key);
-                    else
-                        formData.Add(new StringContent(Convert.ToString(item.Value)), item.Key);
-                }
+                if (parameters != null)
+                    foreach (var item in parameters)
+                    {
+                        if (item.Value is string s)
+                            formData.Add(new StringContent(s), item.Key);
+                        else
+                            formData.Add(new StringContent(Convert.ToString(item.Value)), item.Key);
+                    }
 
                 switch (method.Method.ToLower())
                 {

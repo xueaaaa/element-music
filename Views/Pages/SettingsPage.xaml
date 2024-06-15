@@ -36,6 +36,7 @@
                      Content="{DynamicResource DarkThemeName}"
                      GroupName="themeSelect"
                      IsChecked="{Binding ViewModel.CurrentTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}" />
+        
         <TextBlock Margin="0 12 0 0" Text="{DynamicResource LanguageGroupName}" />
         <ComboBox Margin="0 12 0 0"
                   ItemsSource="{Binding ViewModel.Languages}"
@@ -43,6 +44,17 @@
                   IsEditable="False"
                   DisplayMemberPath="DisplayName"
                   SelectedValuePath="Tag"/>
+
+        <StackPanel Margin="0 24 0 0"
+                    Orientation="Horizontal">
+            <ui:Button Command="{Binding ViewModel.LogoutCommand}"
+                       Appearance="Danger"
+                       Content="{DynamicResource LogoutButton}"/>
+            <ui:TextBlock Margin="8 0 0 0"
+                          Appearance="Secondary"
+                          VerticalAlignment="Center"
+                          Text="{DynamicResource LogoutButtonLabel}"/>
+        </StackPanel>
 
         <ui:CardExpander Margin="0 24 0 0"
                          Header="{DynamicResource AboutHeader}">

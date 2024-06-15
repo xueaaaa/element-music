@@ -3,6 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <v:String x:Key="MainPageTitle">Главная</v:String>
     <v:String x:Key="FavoritesPageTitle">Избранное</v:String>
+    <v:String x:Key="UploadPageTitle">Загрузить песню</v:String>
     <v:String x:Key="SettingsPageTitle">Настройки</v:String>
 
     <v:String x:Key="LoginCardHeader">Вход</v:String>
@@ -17,6 +18,8 @@
     <v:String x:Key="LightThemeName">Светлая</v:String>
     <v:String x:Key="DarkThemeName">Тёмная</v:String>
     <v:String x:Key="LanguageGroupName">Язык</v:String>
+    <v:String x:Key="LogoutButton">Выйти</v:String>
+    <v:String x:Key="LogoutButtonLabel">Если у вас есть проблемы с загрузкой песен, или вы хотите перезайти с другого аккаунта, воспользуйтесь этой кнопкой.</v:String>
     <v:String x:Key="AboutHeader">Об Element Music</v:String>
     <v:String x:Key="VersionLabel">Версия приложения</v:String>
     <v:String x:Key="ApplicationAuthorLabel">Разработчик приложения</v:String>

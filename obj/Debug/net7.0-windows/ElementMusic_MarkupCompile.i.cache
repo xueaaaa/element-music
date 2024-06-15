@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 D:\C#\ElementMusic\App.xaml
-4-994352197
+6-726475844
 
-211443955488
+261041907888
 227-1172065473
-Resources\Locales\Locale.xaml;Resources\Locales\ru.Locale.xaml;Views\Pages\SettingsPage.xaml;Views\Windows\MainWindow.xaml;
+Resources\Locales\Locale.xaml;Resources\Locales\ru.Locale.xaml;Views\Controls\SongCard.xaml;Views\Pages\MainPage.xaml;Views\Pages\SettingsPage.xaml;Views\Windows\MainWindow.xaml;
 resources\icons\favicon.ico
-True
+False
 

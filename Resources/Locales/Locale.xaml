@@ -3,6 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <v:String x:Key="MainPageTitle">Main</v:String>
     <v:String x:Key="FavoritesPageTitle">Favorites</v:String>
+    <v:String x:Key="UploadPageTitle">Upload song</v:String>
     <v:String x:Key="SettingsPageTitle">Settings</v:String>
 
     <v:String x:Key="LoginCardHeader">Log in</v:String>
@@ -17,6 +18,8 @@
     <v:String x:Key="LightThemeName">Light</v:String>
     <v:String x:Key="DarkThemeName">Dark</v:String>
     <v:String x:Key="LanguageGroupName">Language</v:String>
+    <v:String x:Key="LogoutButton">Log out</v:String>
+    <v:String x:Key="LogoutButtonLabel">If you're having trouble downloading songs, or want to re-login from another account, use this button.</v:String>
     <v:String x:Key="AboutHeader">About Element Music</v:String>
     <v:String x:Key="VersionLabel">Application Version</v:String>
     <v:String x:Key="ApplicationAuthorLabel">Application Developer</v:String>

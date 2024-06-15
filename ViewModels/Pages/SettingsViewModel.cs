@@ -112,5 +112,8 @@ namespace ElementMusic.ViewModels.Pages
                     break;
             }
         }
+
+        [RelayCommand]
+        private void Logout(object param) => Properties.Settings.Default.SessionKey = string.Empty;
     }
 }
