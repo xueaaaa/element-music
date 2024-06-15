@@ -8,7 +8,7 @@
     <Setting Name="Language" Type="System.Globalization.CultureInfo" Scope="User">
       <Value Profile="(Default)">en</Value>
     </Setting>
-    <Setting Name="AuthorizationToken" Type="System.String" Scope="User">
+    <Setting Name="SessionKey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

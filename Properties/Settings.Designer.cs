@@ -50,12 +50,12 @@ namespace ElementMusic.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AuthorizationToken {
+        public string SessionKey {
             get {
-                return ((string)(this["AuthorizationToken"]));
+                return ((string)(this["SessionKey"]));
             }
             set {
-                this["AuthorizationToken"] = value;
+                this["SessionKey"] = value;
             }
         }
     }

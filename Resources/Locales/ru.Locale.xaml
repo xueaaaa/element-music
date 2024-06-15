@@ -9,6 +9,8 @@
     <v:String x:Key="LoginCardLabel">Для использования Element Music сначала необходимо авторизоваться под своей учётной записью в сети Element.</v:String>
     <v:String x:Key="EmailPlaceholder">Адрес электронной почты...</v:String>
     <v:String x:Key="PasswordPlaceholder">Пароль...</v:String>
+    <v:String x:Key="SaveFormLabel">Сохранить данные для последующих авторизаций</v:String>
+    <v:String x:Key="SaveFormToolTip">При включении данного параметра по истечению срока действия сессии Element Music автоматически создаст новую с сохранёнными параметрами.</v:String>
 
     <v:String x:Key="PersonalizationGroupHeader">Персонализация</v:String>
     <v:String x:Key="ThemeGroupName">Тема</v:String>
@@ -19,4 +21,10 @@
     <v:String x:Key="VersionLabel">Версия приложения</v:String>
     <v:String x:Key="ApplicationAuthorLabel">Разработчик приложения</v:String>
     <v:String x:Key="ElementAuthorLabel">Разработчик сети Element</v:String>
+
+    <v:String x:Key="InfoBarSuccessTitle">Успешно</v:String>
+    <v:String x:Key="InfoBarWarningTitle">Внимание</v:String>
+    <v:String x:Key="InfoBarErrorTitle">Ошибка</v:String>
+
+    <v:String x:Key="IncorrectEmailError">Некорректный адрес электронной почты</v:String>
 </ResourceDictionary>

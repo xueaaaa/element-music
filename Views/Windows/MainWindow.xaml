@@ -29,6 +29,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ui:NavigationView x:Name="RootNavigation"
                            Grid.Row="1"
@@ -71,16 +72,30 @@
                               Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
                               Text="{DynamicResource LoginCardLabel}"/>
                 <ui:TextBox Icon="{ui:SymbolIcon Mail24}"
+                            Text="{Binding ViewModel.Email}"
                             PlaceholderText="{DynamicResource EmailPlaceholder}"/>
-                <ui:PasswordBox Margin="0 8 0 24"
+                <ui:PasswordBox Margin="0 8 0 8"
                                 Icon="{ui:SymbolIcon Password24}"
+                                PasswordChanged="PasswordBox_PasswordChanged"
                                 PlaceholderText="{DynamicResource PasswordPlaceholder}" Cursor="IBeam"/>
+                <CheckBox Margin="0 0 0 24"
+                          Content="{DynamicResource SaveFormLabel}"
+                          ToolTip="{DynamicResource SaveFormToolTip}"
+                          IsChecked="{Binding ViewModel.SaveData}"/>
 
-                <ui:Button Appearance="Primary"
+                <ui:Button Command="{Binding ViewModel.LoginCommand}"
+                           Appearance="Primary"
                            HorizontalAlignment="Center"
-                           Content="{DynamicResource LoginCardHeader}"/>
+                           Content="{DynamicResource LoginCardHeader}" Cursor=""/>
             </StackPanel>
         </ui:Card>
+
+        <ui:InfoBar Grid.Row="2"
+                    DataContext="{Binding ViewModel.InfoBarViewModel}"
+                    Title="{Binding Title}"
+                    Message="{Binding Message}"
+                    IsOpen="{Binding IsOpen, Mode=TwoWay}"
+                    Severity="{Binding Severity}"/>
 
         <ContentPresenter x:Name="RootContentDialog"
                           Grid.Row="0"

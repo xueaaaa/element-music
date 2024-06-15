@@ -9,6 +9,8 @@
     <v:String x:Key="LoginCardLabel">To use Element Music, you must first log in with your Element network account.</v:String>
     <v:String x:Key="EmailPlaceholder">Email address...</v:String>
     <v:String x:Key="PasswordPlaceholder">Password address...</v:String>
+    <v:String x:Key="SaveFormLabel">Save the data for future authorizations</v:String>
+    <v:String x:Key="SaveFormToolTip">If you enable this option, when the session expires, Element Music will automatically create a new one with the saved parameters.</v:String>
 
     <v:String x:Key="PersonalizationGroupHeader">Personalization</v:String>
     <v:String x:Key="ThemeGroupName">Theme</v:String>
@@ -19,4 +21,10 @@
     <v:String x:Key="VersionLabel">Application Version</v:String>
     <v:String x:Key="ApplicationAuthorLabel">Application Developer</v:String>
     <v:String x:Key="ElementAuthorLabel">Developer of the Element network</v:String>
+
+    <v:String x:Key="InfoBarSuccessTitle">Success</v:String>
+    <v:String x:Key="InfoBarWarningTitle">Warning</v:String>
+    <v:String x:Key="InfoBarErrorTitle">Error</v:String>
+
+    <v:String x:Key="IncorrectEmailError">Incorrect email address</v:String>
 </ResourceDictionary>

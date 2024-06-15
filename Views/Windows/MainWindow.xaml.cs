@@ -56,5 +56,10 @@ namespace ElementMusic.Views.Windows
         {
             throw new NotImplementedException();
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Password = ((PasswordBox)sender).Password;
+        }
     }
 }

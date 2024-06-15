@@ -10,6 +10,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Authors>xueaaaa</Authors>
     <Company>xueaaaa</Company>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

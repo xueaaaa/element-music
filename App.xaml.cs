@@ -1,4 +1,5 @@
 ﻿using ElementMusic.Models;
+using ElementMusic.Models.ElementAPI;
 using ElementMusic.Properties;
 using ElementMusic.Services;
 using ElementMusic.ViewModels.Pages;
@@ -48,6 +49,9 @@ namespace ElementMusic
                 services.AddSingleton<SettingsViewModel>();
             }).Build();
 
+        internal static readonly APISender APISender 
+            = new APISender();
+
         /// <summary>
         /// Gets registered service.
         /// </summary>
@@ -77,6 +81,8 @@ namespace ElementMusic
             Localizator.CurrentLanguage = lang == null ?
                 Settings.Default.DefaultLanguage :
                 lang;
+
+            Settings.Default.PropertyChanged += (_, _) => Settings.Default.Save();
 
             _host.Start();
         }
