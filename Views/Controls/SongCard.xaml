@@ -20,16 +20,18 @@
         <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <Border Height="120" Width="120"
+    <Border Height="150" Width="150"
             Margin="0 15 0 0"
             CornerRadius="10"
             BorderThickness="0">
         <Grid>
             <Image Source="{Binding Song.Cover.SimpleImage, ElementName=Grid, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"
                    Panel.ZIndex="2"
-                   Height="110"
-                   Width="110"/>
+                   Stretch="Fill"
+                   Height="140"
+                   Width="140"/>
             <Image Source="{Binding Song.Cover.SimpleImage, ElementName=Grid, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"
+                   Stretch="Fill"
                    Panel.ZIndex="1">
                 <Image.Effect>
                     <BlurEffect Radius="15"/>
@@ -39,12 +41,16 @@
     </Border>
 
     <StackPanel Grid.Row="1"
-                HorizontalAlignment="Center"
+                MaxWidth="150"
                 Margin="0 8 0 0">
         <ui:TextBlock Appearance="Primary"
+                      TextTrimming="CharacterEllipsis"
                       FontTypography="BodyStrong"
+                      ToolTip="{Binding Song.Title, ElementName=Grid}"
                       Text="{Binding Song.Title, ElementName=Grid}"/>
         <ui:TextBlock Appearance="Secondary"
+                      TextTrimming="CharacterEllipsis"
+                      ToolTip="{Binding Song.Title, ElementName=Grid}"
                       Text="{Binding Song.Artist, ElementName=Grid}"/>
     </StackPanel>
 </Grid>

@@ -13,6 +13,9 @@
     <v:String x:Key="SaveFormLabel">Save the data for future authorizations</v:String>
     <v:String x:Key="SaveFormToolTip">If you enable this option, when the session expires, Element Music will automatically create a new one with the saved parameters.</v:String>
 
+    <v:String x:Key="RecentlyAddedHeader">Recently added</v:String>
+    <v:String x:Key="LoadMoreToolTip">Load more</v:String>
+
     <v:String x:Key="PersonalizationGroupHeader">Personalization</v:String>
     <v:String x:Key="ThemeGroupName">Theme</v:String>
     <v:String x:Key="LightThemeName">Light</v:String>

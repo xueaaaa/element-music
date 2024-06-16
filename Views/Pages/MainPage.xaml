@@ -23,7 +23,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <c:SongCard Song="{Binding ViewModel.SongList[0]}"/>
+            <ui:TextBlock Margin="0 0 0 12"
+                          FontTypography="Title"
+                          Text="{DynamicResource RecentlyAddedHeader}"/>
+            <c:SongCarousel SongsType="Latest"/>
         </StackPanel>
 
         <ui:InfoBar Grid.Row="1"

@@ -53,6 +53,7 @@
             <ui:TextBlock Margin="8 0 0 0"
                           Appearance="Secondary"
                           VerticalAlignment="Center"
+                          TextWrapping="Wrap"
                           Text="{DynamicResource LogoutButtonLabel}"/>
         </StackPanel>
 

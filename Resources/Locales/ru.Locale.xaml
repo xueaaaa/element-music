@@ -13,6 +13,9 @@
     <v:String x:Key="SaveFormLabel">Сохранить данные для последующих авторизаций</v:String>
     <v:String x:Key="SaveFormToolTip">При включении данного параметра по истечению срока действия сессии Element Music автоматически создаст новую с сохранёнными параметрами.</v:String>
 
+    <v:String x:Key="RecentlyAddedHeader">Недавно добавленное</v:String>
+    <v:String x:Key="LoadMoreToolTip">Загрузить ещё</v:String>
+
     <v:String x:Key="PersonalizationGroupHeader">Персонализация</v:String>
     <v:String x:Key="ThemeGroupName">Тема</v:String>
     <v:String x:Key="LightThemeName">Светлая</v:String>
