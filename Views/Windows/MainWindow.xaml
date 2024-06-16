@@ -13,7 +13,7 @@
                  d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=True}"
                  d:DesignHeight="450"
-                 d:DesignWidth="800"
+                 d:DesignWidth="1400"
                  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
                  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                  ExtendsContentIntoTitleBar="True"
@@ -25,11 +25,13 @@
     <ui:FluentWindow.Resources>
         <h:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <h:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+        <h:UriConverter x:Key="UriConverter"/>
     </ui:FluentWindow.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ui:NavigationView x:Name="RootNavigation"
@@ -95,7 +97,79 @@
             </StackPanel>
         </ui:Card>
 
-        <ui:InfoBar Grid.Row="2"
+        <ui:Card Grid.Row="2"
+                 Margin="300 7"
+                 Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel.SongPlayerViewModel.SongLoaded, Converter={StaticResource BooleanToVisibilityConverter}}"
+                 DataContext="{Binding ViewModel.SongPlayerViewModel}">
+            <Grid Margin="5 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <ui:Image Grid.RowSpan="3"
+                          Height="70"
+                          Stretch="Fill"
+                          Source="{Binding Song.Cover.SimpleImage, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"
+                          d:Source="/Resources/Icons/favicon.png"/>
+
+                <ui:TextBlock Grid.Column="1"
+                              Margin="15 0 0 0"
+                              FontTypography="Subtitle"
+                              Text="{Binding Song.Title}"
+                              d:Text="Song title"/>
+                <ui:TextBlock Grid.Column="1"
+                              Grid.Row="1"
+                              Margin="15 0 0 0"
+                              Appearance="Secondary"
+                              Text="{Binding Song.Artist}"
+                              d:Text="Song artist"/>
+
+                <ui:Button Grid.Column="2"
+                           Grid.RowSpan="2"
+                           Command="{Binding PlayCommand}"
+                           Icon="{ui:SymbolIcon Play24}"
+                           Visibility="{Binding Playing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                           Appearance="Transparent"/>
+                <ui:Button Grid.Column="2"
+                           Grid.RowSpan="2"
+                           Command="{Binding PauseCommand}"
+                           Icon="{ui:SymbolIcon Pause24}"
+                           Visibility="{Binding Playing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           Appearance="Transparent"/>
+
+                <Grid Grid.Column="1"
+                      Grid.ColumnSpan="2"
+                      Grid.Row="2"
+                      Margin="15 0 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider VerticalAlignment="Center"
+                            Background="{ui:ThemeResource AccentTextFillColorPrimaryBrush}"
+                            IsSelectionRangeEnabled="True"
+                            SelectionStart="0"
+                            SelectionEnd="{Binding PlayingProgress}"
+                            Minimum="0"
+                            Maximum="100"
+                            Value="{Binding PlayingProgress}"
+                            ValueChanged="Slider_ValueChanged"/>
+                    <ui:TextBlock Margin="7 0 0 0"
+                                  Grid.Column="1"
+                                  Appearance="Tertiary"
+                                  Text="{Binding PlayingProgressLabel}"/>
+                </Grid>
+            </Grid>
+        </ui:Card>
+        
+        <ui:InfoBar Grid.Row="3"
                     DataContext="{Binding ViewModel.InfoBarViewModel}"
                     Title="{Binding Title}"
                     Message="{Binding Message}"

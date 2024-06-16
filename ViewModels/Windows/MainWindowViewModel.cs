@@ -11,6 +11,8 @@ namespace ElementMusic.ViewModels.Windows
         [ObservableProperty]
         private InfoBarViewModel _infoBarViewModel = new InfoBarViewModel();
         [ObservableProperty]
+        private SongPlayerViewModel _songPlayerViewModel = new SongPlayerViewModel();
+        [ObservableProperty]
         private bool _isAuthorized;
 
         [Required]
@@ -63,6 +65,15 @@ namespace ElementMusic.ViewModels.Windows
                     IsAuthorized = Properties.Settings.Default.SessionKey == string.Empty ?
                         false : true;
             };
+
+            Load();
+        }
+
+        private async void Load()
+        {
+            //TEMP
+            Song song = (JsonSerializer.Deserialize<List<Song>>(await (await App.APISender.SendRequest("LoadSongs.php?F=LATEST", HttpMethod.Post)).Content.ReadAsStringAsync()))[0];
+            SongPlayerViewModel.Song = song;
         }
 
         [RelayCommand]

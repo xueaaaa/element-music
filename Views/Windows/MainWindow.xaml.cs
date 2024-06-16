@@ -61,5 +61,10 @@ namespace ElementMusic.Views.Windows
         {
             ViewModel.Password = ((PasswordBox)sender).Password;
         }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ViewModel.SongPlayerViewModel.PlayingProgressChanged();
+        }
     }
 }
