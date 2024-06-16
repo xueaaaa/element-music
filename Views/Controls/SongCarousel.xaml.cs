@@ -1,9 +1,12 @@
-﻿using System.Windows.Controls;
-using ElementMusic.ViewModels.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Net.Http;
+using System.Text.Json;
+using System.Windows.Controls;
+using ElementMusic.Models.ElementAPI;
 
 namespace ElementMusic.Views.Controls
 {
-    public enum SongsType
+    public enum SongType
     {
         Latest,
         Random,
@@ -12,23 +15,59 @@ namespace ElementMusic.Views.Controls
 
     public partial class SongCarousel : Grid
     {
-        public static readonly DependencyProperty SongsTypeProperty =
-            DependencyProperty.Register("SongsType", typeof(SongsType), typeof(SongCarousel));
+        public static readonly DependencyProperty SourceProperty =
+            DependencyProperty.Register("Source", typeof(ObservableCollection<Song>), typeof(SongCarousel));
+        public static readonly DependencyProperty SongTypeProperty =
+            DependencyProperty.Register("SongType", typeof(SongType), typeof(SongCarousel));
 
-        public SongsType SongsType
+
+        public SongType SongType
         {
-            get => (SongsType)GetValue(SongsTypeProperty);
-            set => SetValue(SongsTypeProperty, value);
+            get => (SongType)GetValue(SongTypeProperty);
+            set => SetValue(SongTypeProperty, value);
         }
 
-        public SongCarouselViewModel ViewModel { get; set; }
+        public ObservableCollection<Song> Source
+        {
+            get => (ObservableCollection<Song>)GetValue(SourceProperty);
+            set => SetValue(SourceProperty, value);
+        }
 
         public SongCarousel()
         {
-            ViewModel = new SongCarouselViewModel(SongsType);
-            ViewModel.LoadSongs();
-
             InitializeComponent();
+            LoadSongs();
+        }
+
+        public async void LoadSongs(bool startsFromLast = false)
+        {
+            string type = string.Empty;
+            switch ((SongType)Tag)
+            {
+                case SongType.Latest:
+                    type = "LATEST";
+                    break;
+                case SongType.Random:
+                    type = "RANDOM";
+                    break;
+                case SongType.Favorites:
+                    type = "FAVORITES";
+                    break;
+                default:
+                    type = "LATEST";
+                    break;
+            }
+
+            HttpResponseMessage? obj = await App.APISender.SendRequest($"LoadSongs.php?F={type}", HttpMethod.Post, new Dictionary<string, object>()
+            {
+                { "StartIndex", startsFromLast ? Source.Count : 0 }
+            });
+            ObservableCollection<Song>? songs = JsonSerializer.Deserialize<ObservableCollection<Song>?>(await obj.Content.ReadAsStringAsync());
+
+            if (Source != null)
+                foreach (var item in songs)
+                    Source.Add(item);
+            else Source = songs;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,6 +89,6 @@ namespace ElementMusic.Views.Controls
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e) =>
-            ViewModel.LoadSongs(true);
+            LoadSongs(true);
     }
 }

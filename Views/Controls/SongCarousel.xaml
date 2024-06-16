@@ -5,13 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:ElementMusic.Views.Controls"
+      Tag="{Binding ElementName=Grid, Path=SongType}"
       Name="Grid"
       mc:Ignorable="d">
     <Grid>
         <ItemsControl Grid.Column="1"
                       x:Name="SongsControl"
                       Margin="7 0"
-                      ItemsSource="{Binding ViewModel.Source, ElementName=Grid}">
+                      ItemsSource="{Binding ElementName=Grid, Path=Source}">
             <ItemsControl.Template>
                 <ControlTemplate>
                     <Grid>

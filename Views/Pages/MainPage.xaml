@@ -26,7 +26,11 @@
             <ui:TextBlock Margin="0 0 0 12"
                           FontTypography="Title"
                           Text="{DynamicResource RecentlyAddedHeader}"/>
-            <c:SongCarousel SongsType="Latest"/>
+            <c:SongCarousel SongType="Latest"/>
+            <ui:TextBlock Margin="0 24 0 12"
+                          FontTypography="Title"
+                          Text="{DynamicResource RandomHeader}"/>
+            <c:SongCarousel SongType="Random"/>
         </StackPanel>
 
         <ui:InfoBar Grid.Row="1"
