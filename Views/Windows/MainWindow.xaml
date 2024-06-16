@@ -131,18 +131,42 @@
                               Text="{Binding Song.Artist}"
                               d:Text="Song artist"/>
 
-                <ui:Button Grid.Column="2"
-                           Grid.RowSpan="2"
-                           Command="{Binding PlayCommand}"
-                           Icon="{ui:SymbolIcon Play24}"
-                           Visibility="{Binding Playing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
-                           Appearance="Transparent"/>
-                <ui:Button Grid.Column="2"
-                           Grid.RowSpan="2"
-                           Command="{Binding PauseCommand}"
-                           Icon="{ui:SymbolIcon Pause24}"
-                           Visibility="{Binding Playing, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           Appearance="Transparent"/>
+                <Grid Grid.Column="2"
+                      Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <ui:Button Command="{Binding PlayCommand}"
+                               Icon="{ui:SymbolIcon Play24}"
+                               Visibility="{Binding Playing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                               Appearance="Transparent"/>
+                    <ui:Button Command="{Binding PauseCommand}"
+                               Icon="{ui:SymbolIcon Pause24}"
+                               Visibility="{Binding Playing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                               Appearance="Transparent"/>
+
+                    <ui:Button Grid.Row="1"
+                               Margin="0 3 0 0"
+                               Command="{Binding OpenVolumeMenuCommand}"
+                               Icon="{ui:SymbolIcon Megaphone24}"
+                               Appearance="Transparent"/>
+
+                    <ui:Flyout Grid.Row="0"
+                               IsOpen="{Binding IsVolumeMenuOpen, Mode=TwoWay}">
+                        <StackPanel>
+                            <Slider Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    Minimum="0"
+                                    Maximum="100"
+                                    Value="{Binding Volume}"
+                                    ValueChanged="Slider_ValueChanged_1"/>
+                            <ui:TextBlock Margin="0 5 0 0"
+                                          HorizontalAlignment="Center"
+                                          Text="{Binding Volume}"/>
+                        </StackPanel>
+                    </ui:Flyout>
+                </Grid>
 
                 <Grid Grid.Column="1"
                       Grid.ColumnSpan="2"

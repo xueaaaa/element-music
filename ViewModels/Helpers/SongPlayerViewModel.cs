@@ -29,13 +29,19 @@ namespace ElementMusic.ViewModels.Helpers
         [ObservableProperty]
         private double _playingProgress;
         [ObservableProperty]
-        private string _playingProgressLabel;
+        private string _playingProgressLabel = "--:-- / --:--";
+        [ObservableProperty]
+        private int _volume;
+        [ObservableProperty]
+        private bool _isVolumeMenuOpen;
 
         private bool _paused;
         private bool _ignoreChange;
 
         public SongPlayerViewModel()
         {
+            Volume = (int)(_mediaPlayer.Volume * 100);
+
             _mediaPlayer.MediaOpened += (_, _) =>
             {
                 DispatcherTimer timer = new DispatcherTimer();
@@ -61,6 +67,9 @@ namespace ElementMusic.ViewModels.Helpers
             _mediaPlayer.Position = TimeSpan.FromSeconds(newProgress);
         }
 
+        public void VolumeChanged() =>
+            _mediaPlayer.Volume = (double)Volume / 100;
+
         [RelayCommand]
         private void Play()
         {
@@ -76,6 +85,13 @@ namespace ElementMusic.ViewModels.Helpers
             _mediaPlayer.Pause();
             Playing = false;
             _paused = true;
+        }
+
+        [RelayCommand]
+        private void OpenVolumeMenu() 
+        {
+            if (!IsVolumeMenuOpen)
+                IsVolumeMenuOpen = true;       
         }
     }
 }

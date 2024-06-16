@@ -66,5 +66,10 @@ namespace ElementMusic.Views.Windows
         {
             ViewModel.SongPlayerViewModel.PlayingProgressChanged();
         }
+
+        private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ViewModel.SongPlayerViewModel.VolumeChanged();
+        }
     }
 }
