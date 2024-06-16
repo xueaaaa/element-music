@@ -13,6 +13,14 @@
     <v:String x:Key="SaveFormLabel">Сохранить данные для последующих авторизаций</v:String>
     <v:String x:Key="SaveFormToolTip">При включении данного параметра по истечению срока действия сессии Element Music автоматически создаст новую с сохранёнными параметрами.</v:String>
 
+    <v:String x:Key="SongInfoHeader">Подробная информация</v:String>
+    <v:String x:Key="SongTitleLabel">Название</v:String>
+    <v:String x:Key="SongArtistLabel">Исполнитель</v:String>
+    <v:String x:Key="ReleaseYearLabel">Год выхода</v:String>
+    <v:String x:Key="BitrateLabel">Битрейт</v:String>
+    <v:String x:Key="FormatLabel">Формат</v:String>
+    <v:String x:Key="CloseButton">Закрыть</v:String>
+
     <v:String x:Key="RecentlyAddedHeader">Недавно добавленное</v:String>
     <v:String x:Key="RandomHeader">Случайное</v:String>
     <v:String x:Key="LoadMoreToolTip">Загрузить ещё</v:String>

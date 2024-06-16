@@ -1,6 +1,7 @@
 ﻿using ElementMusic.Models.ElementAPI;
 using System.Windows.Media;
 using System.Windows.Threading;
+using MessageBox = Wpf.Ui.Controls.MessageBox;
 
 namespace ElementMusic.ViewModels.Helpers
 {
@@ -9,18 +10,20 @@ namespace ElementMusic.ViewModels.Helpers
         private readonly MediaPlayer _mediaPlayer 
             = new MediaPlayer();
 
-
-        private Song _song;
-        public Song Song
+        private Song _currentSong;
+        public Song CurrentSong
         {
-            get => _song;
+            get => _currentSong;
             set
             {
-                _song = value;
+                _currentSong = value;
                 SongLoaded = true;
-                OnPropertyChanged(nameof(Song));
+                OnPropertyChanged(nameof(CurrentSong));
             }
         }
+
+        private Queue<Song> _songQueue
+            = new Queue<Song>();
 
         [ObservableProperty]
         private bool _songLoaded;
@@ -57,7 +60,16 @@ namespace ElementMusic.ViewModels.Helpers
             PlayingProgress = _mediaPlayer.Position.TotalSeconds / _mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds * 100;
             _ignoreChange = false;
             PlayingProgressLabel = $"{_mediaPlayer.Position:mm\\:ss} / {_mediaPlayer.NaturalDuration.TimeSpan:mm\\:ss}";
+
+            if(PlayingProgress >= 100 && _songQueue.TryPeek(out var song))
+            {
+                CurrentSong = song;
+                Play();
+            }
         }
+
+        public void AddToQueue(Song song) =>
+            _songQueue.Enqueue(song);
 
         public void PlayingProgressChanged()
         {
@@ -74,7 +86,7 @@ namespace ElementMusic.ViewModels.Helpers
         private void Play()
         {
             if (!_paused)
-                _mediaPlayer.Open(new Uri($"https://elemsocial.com/Content/Music/Files/{Song.File}"));
+                _mediaPlayer.Open(new Uri($"https://elemsocial.com/Content/Music/Files/{CurrentSong.File}"));
             _mediaPlayer.Play();
             Playing = true;
         }
@@ -92,6 +104,23 @@ namespace ElementMusic.ViewModels.Helpers
         {
             if (!IsVolumeMenuOpen)
                 IsVolumeMenuOpen = true;       
+        }
+
+        [RelayCommand]
+        private async void ShowInfo()
+        {
+            var msgBox = new MessageBox
+            {
+                Title = Application.Current.Resources["SongInfoHeader"].ToString(),
+                Content = $"{Application.Current.Resources["SongTitleLabel"]}: {CurrentSong.Title}" +
+                $"\n{Application.Current.Resources["SongArtistLabel"]}: {CurrentSong.Artist}" +
+                $"\n{Application.Current.Resources["ReleaseYearLabel"]}: {CurrentSong.ReleaseYear}" +
+                $"\n{Application.Current.Resources["BitrateLabel"]}: {CurrentSong.Bitrate}" +
+                $"\n{Application.Current.Resources["FormatLabel"]}: {CurrentSong.AudioFormat}",
+                CloseButtonText = Application.Current.Resources["CloseButton"].ToString() ?? string.Empty
+            };
+
+            await msgBox.ShowDialogAsync();
         }
     }
 }

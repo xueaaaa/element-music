@@ -13,6 +13,14 @@
     <v:String x:Key="SaveFormLabel">Save the data for future authorizations</v:String>
     <v:String x:Key="SaveFormToolTip">If you enable this option, when the session expires, Element Music will automatically create a new one with the saved parameters.</v:String>
 
+    <v:String x:Key="SongInfoHeader">More Info</v:String>
+    <v:String x:Key="SongTitleLabel">Song title</v:String>
+    <v:String x:Key="SongArtistLabel">Artist</v:String>
+    <v:String x:Key="ReleaseYearLabel">Release year</v:String>
+    <v:String x:Key="BitrateLabel">Bitrate</v:String>
+    <v:String x:Key="FormatLabel">Format</v:String>
+    <v:String x:Key="CloseButton">Close</v:String>
+
     <v:String x:Key="RecentlyAddedHeader">Recently added</v:String>
     <v:String x:Key="RandomHeader">Random</v:String>
     <v:String x:Key="LoadMoreToolTip">Load more</v:String>

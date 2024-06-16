@@ -110,50 +110,49 @@
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <ui:Image Grid.RowSpan="3"
+                <ui:Image Grid.RowSpan="2"
                           Height="70"
                           Stretch="Fill"
-                          Source="{Binding Song.Cover.SimpleImage, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"
-                          d:Source="/Resources/Icons/favicon.png"/>
+                          Source="{Binding CurrentSong.Cover.SimpleImage, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"/>
 
-                <ui:TextBlock Grid.Column="1"
-                              Margin="15 0 0 0"
-                              FontTypography="Subtitle"
-                              Text="{Binding Song.Title}"
-                              d:Text="Song title"/>
-                <ui:TextBlock Grid.Column="1"
-                              Grid.Row="1"
-                              Margin="15 0 0 0"
-                              Appearance="Secondary"
-                              Text="{Binding Song.Artist}"
-                              d:Text="Song artist"/>
+                <StackPanel Grid.Column="1">
+                    <ui:TextBlock Margin="15 0 0 0"
+                                  FontTypography="Subtitle"
+                                  Text="{Binding CurrentSong.Title}"/>
+                    <ui:TextBlock Margin="15 0 0 0"
+                                  Appearance="Secondary"
+                                  Text="{Binding CurrentSong.Artist}"/>
+                </StackPanel>
 
-                <Grid Grid.Column="2"
-                      Grid.RowSpan="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <ui:Button Command="{Binding PlayCommand}"
-                               Icon="{ui:SymbolIcon Play24}"
-                               Visibility="{Binding Playing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
-                               Appearance="Transparent"/>
-                    <ui:Button Command="{Binding PauseCommand}"
-                               Icon="{ui:SymbolIcon Pause24}"
-                               Visibility="{Binding Playing, Converter={StaticResource BooleanToVisibilityConverter}}"
-                               Appearance="Transparent"/>
+                <UniformGrid Grid.Column="2"
+                             Rows="2"
+                             Columns="2">
+                    <Grid>
+                        <ui:Button Command="{Binding PlayCommand}"
+                                   Icon="{ui:SymbolIcon Play24}"
+                                   Visibility="{Binding Playing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                                   Appearance="Transparent"/>
+                        <ui:Button Command="{Binding PauseCommand}"
+                                   Icon="{ui:SymbolIcon Pause24}"
+                                   Visibility="{Binding Playing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Appearance="Transparent"/>
+                    </Grid>
 
                     <ui:Button Grid.Row="1"
-                               Margin="0 3 0 0"
+                               Margin="3 0 0 0"
                                Command="{Binding OpenVolumeMenuCommand}"
                                Icon="{ui:SymbolIcon Megaphone24}"
                                Appearance="Transparent"/>
 
-                    <ui:Flyout Grid.Row="0"
-                               IsOpen="{Binding IsVolumeMenuOpen, Mode=TwoWay}">
+                    <ui:Button Grid.Row="2"
+                               Margin="0 3 0 3"
+                               Command="{Binding ShowInfoCommand}"
+                               Icon="{ui:SymbolIcon Info24}"
+                               Appearance="Transparent"/>
+
+                    <ui:Flyout IsOpen="{Binding IsVolumeMenuOpen, Mode=TwoWay}">
                         <StackPanel>
                             <Slider Orientation="Vertical"
                                     HorizontalAlignment="Center"
@@ -166,7 +165,7 @@
                                           Text="{Binding Volume}"/>
                         </StackPanel>
                     </ui:Flyout>
-                </Grid>
+                </UniformGrid>
 
                 <Grid Grid.Column="1"
                       Grid.ColumnSpan="2"
