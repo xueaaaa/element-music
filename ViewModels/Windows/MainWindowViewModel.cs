@@ -65,16 +65,6 @@ namespace ElementMusic.ViewModels.Windows
                     IsAuthorized = Properties.Settings.Default.SessionKey == string.Empty ?
                         false : true;
             };
-
-            Load();
-        }
-
-        private async void Load()
-        {
-            //TEMP
-            List<Song> song = (JsonSerializer.Deserialize<List<Song>>(await (await App.APISender.SendRequest("LoadSongs.php?F=LATEST", HttpMethod.Post)).Content.ReadAsStringAsync()));
-            SongPlayerViewModel.CurrentSong = song[0];
-            SongPlayerViewModel.AddToQueue(song[1]);
         }
 
         [RelayCommand]

@@ -30,12 +30,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ui:NavigationView x:Name="RootNavigation"
-                           Grid.Row="1"
+                           Grid.Row="2"
                            Visibility="{Binding ViewModel.IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
                            Padding="42 0 42 0"
                            BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
@@ -67,7 +67,7 @@
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
-        <ui:Card Grid.Row="1"
+        <ui:Card Grid.Row="2"
                  Visibility="{Binding ViewModel.IsAuthorized, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center">
@@ -97,7 +97,7 @@
             </StackPanel>
         </ui:Card>
 
-        <ui:Card Grid.Row="2"
+        <ui:Card Grid.Row="1"
                  Margin="300 7"
                  Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel.SongPlayerViewModel.SongLoaded, Converter={StaticResource BooleanToVisibilityConverter}}"
                  DataContext="{Binding ViewModel.SongPlayerViewModel}">
@@ -128,31 +128,66 @@
 
                 <UniformGrid Grid.Column="2"
                              Rows="2"
-                             Columns="2">
-                    <Grid>
+                             Columns="3">
+                    <ui:Button Command="{Binding GoBackwardSongCommand}"
+                               Icon="{ui:SymbolIcon ArrowLeft24}"
+                               IsEnabled="{Binding BackwardEnabled}"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               Appearance="Transparent"
+                               BorderThickness="0"/>
+
+                    <Grid HorizontalAlignment="Center"
+                          Margin="3 0 3 0">
                         <ui:Button Command="{Binding PlayCommand}"
+                                   FontSize="18"
                                    Icon="{ui:SymbolIcon Play24}"
                                    Visibility="{Binding Playing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                                    Appearance="Transparent"/>
                         <ui:Button Command="{Binding PauseCommand}"
+                                   FontSize="18"
                                    Icon="{ui:SymbolIcon Pause24}"
                                    Visibility="{Binding Playing, Converter={StaticResource BooleanToVisibilityConverter}}"
                                    Appearance="Transparent"/>
                     </Grid>
+                    
+                    <ui:Button Command="{Binding GoForwardSongCommand}"
+                               FontSize="18"
+                               HorizontalAlignment="Center"
+                               Icon="{ui:SymbolIcon ArrowRight24}"
+                               IsEnabled="{Binding ForwardEnabled}"
+                               Appearance="Transparent"
+                               BorderThickness="0"/>
 
-                    <ui:Button Grid.Row="1"
-                               Margin="3 0 0 0"
-                               Command="{Binding OpenVolumeMenuCommand}"
+                    <ui:Button Command="{Binding FlyoutViewModel.OpenCommand}"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
                                Icon="{ui:SymbolIcon Megaphone24}"
-                               Appearance="Transparent"/>
+                               Appearance="Transparent"
+                               BorderThickness="0"/>
 
-                    <ui:Button Grid.Row="2"
-                               Margin="0 3 0 3"
-                               Command="{Binding ShowInfoCommand}"
+                    <Grid HorizontalAlignment="Center"
+                          Margin="3 0 3 0">
+                        <ui:Button Command="{Binding CurrentSong.SetLikeCommand}"
+                                   FontSize="18"
+                                   Icon="{ui:SymbolIcon Heart24}"
+                                   Visibility="{Binding CurrentSong.Liked, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                                   Appearance="Transparent"/>
+                        <ui:Button Command="{Binding CurrentSong.SetLikeCommand}"
+                                   FontSize="18"
+                                   Icon="{ui:SymbolIcon HeartBroken24}"
+                                   Visibility="{Binding CurrentSong.Liked, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Appearance="Transparent"/>
+                    </Grid>
+
+                    <ui:Button Command="{Binding ShowInfoCommand}"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
                                Icon="{ui:SymbolIcon Info24}"
-                               Appearance="Transparent"/>
+                               Appearance="Transparent"
+                               BorderThickness="0"/>
 
-                    <ui:Flyout IsOpen="{Binding IsVolumeMenuOpen, Mode=TwoWay}">
+                    <ui:Flyout IsOpen="{Binding FlyoutViewModel.IsOpened, Mode=TwoWay}">
                         <StackPanel>
                             <Slider Orientation="Vertical"
                                     HorizontalAlignment="Center"
@@ -176,10 +211,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Slider VerticalAlignment="Center"
-                            Background="{ui:ThemeResource AccentTextFillColorPrimaryBrush}"
                             IsSelectionRangeEnabled="True"
-                            SelectionStart="0"
-                            SelectionEnd="{Binding PlayingProgress}"
+                            Background="{ui:ThemeResource AccentTextFillColorPrimaryBrush}"
                             Minimum="0"
                             Maximum="100"
                             Value="{Binding PlayingProgress}"

@@ -10,6 +10,7 @@
       d:DataContext="{d:DesignInstance s:Song,
                          IsDesignTimeCreatable=False}"
       Name="Grid"
+      MouseLeftButtonDown="Grid_MouseLeftButtonDown"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
     <Grid.Resources>
@@ -19,6 +20,18 @@
         <RowDefinition Height="Auto"/>
         <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
+    <Grid.Style>
+        <Style TargetType="Grid">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Opacity" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Grid.Style>
 
     <Border Height="150" Width="150"
             Margin="0 15 0 0"
@@ -26,11 +39,13 @@
             BorderThickness="0">
         <Grid>
             <Image Source="{Binding Song.Cover.SimpleImage, ElementName=Grid, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"
+                   RenderOptions.BitmapScalingMode="Fant"
                    Panel.ZIndex="2"
                    Stretch="Fill"
                    Height="140"
                    Width="140"/>
             <Image Source="{Binding Song.Cover.SimpleImage, ElementName=Grid, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"
+                   RenderOptions.BitmapScalingMode="LowQuality"
                    Stretch="Fill"
                    Panel.ZIndex="1">
                 <Image.Effect>
@@ -40,17 +55,43 @@
         </Grid>
     </Border>
 
-    <StackPanel Grid.Row="1"
-                MaxWidth="150"
-                Margin="0 8 0 0">
-        <ui:TextBlock Appearance="Primary"
-                      TextTrimming="CharacterEllipsis"
-                      FontTypography="BodyStrong"
-                      ToolTip="{Binding Song.Title, ElementName=Grid}"
-                      Text="{Binding Song.Title, ElementName=Grid}"/>
-        <ui:TextBlock Appearance="Secondary"
-                      TextTrimming="CharacterEllipsis"
-                      ToolTip="{Binding Song.Title, ElementName=Grid}"
-                      Text="{Binding Song.Artist, ElementName=Grid}"/>
-    </StackPanel>
+    <Grid Grid.Row="1"
+          MaxWidth="150"
+          Margin="0 8 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <ui:TextBlock Appearance="Primary"
+                          TextTrimming="CharacterEllipsis"
+                          FontTypography="BodyStrong"
+                          ToolTip="{Binding Song.Title, ElementName=Grid}"
+                          Text="{Binding Song.Title, ElementName=Grid}"/>
+            <ui:TextBlock Appearance="Secondary"
+                          TextTrimming="CharacterEllipsis"
+                          ToolTip="{Binding Song.Title, ElementName=Grid}"
+                          Text="{Binding Song.Artist, ElementName=Grid}"/>
+        </StackPanel>
+
+        <ui:Button Grid.Column="1"
+                   Margin="7 0 0 0"
+                   Command="{Binding ElementName=Grid, Path=FlyoutViewModel.OpenCommand}"
+                   HorizontalAlignment="Right"
+                   Appearance="Transparent"
+                   BorderThickness="0"
+                   Icon="{ui:SymbolIcon GridDots24}"/>
+        <ui:Flyout Grid.Column="1"
+                   IsOpen="{Binding ElementName=Grid, Path=FlyoutViewModel.IsOpened, Mode=TwoWay}"
+                   HorizontalAlignment="Right"
+                   Placement="Bottom">
+            <StackPanel>
+                <ui:Button Command="{Binding ToQueueCommand}"
+                           Icon="{ui:SymbolIcon PeopleQueue24}"
+                           Content="{DynamicResource ToQueueButton}"
+                           Appearance="Transparent"/>
+            </StackPanel>
+        </ui:Flyout>
+    </Grid>
 </Grid>

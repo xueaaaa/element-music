@@ -1,4 +1,6 @@
 ﻿using ElementMusic.Models.ElementAPI;
+using ElementMusic.ViewModels.Helpers;
+using ElementMusic.ViewModels.Windows;
 using System.Windows.Controls;
 
 namespace ElementMusic.Views.Controls
@@ -14,9 +16,18 @@ namespace ElementMusic.Views.Controls
             set => SetValue(SongProperty, value);
         }
 
+        public FlyoutViewModel FlyoutViewModel { get; set; }
+            = new FlyoutViewModel();
+
         public SongCard()
         {
             InitializeComponent();
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var player = App.GetService<MainWindowViewModel>().SongPlayerViewModel;
+            player.StartFromNew(Song);
         }
     }
 }

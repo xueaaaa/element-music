@@ -1,9 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using ElementMusic.ViewModels.Windows;
+using System.Net.Http;
+using System.Text.Json.Serialization;
 
 namespace ElementMusic.Models.ElementAPI
 {
     public partial class Song : ObservableObject
     {
+        [ObservableProperty]
+        private int? _ID;
         [ObservableProperty]
         private string? _title;
         [ObservableProperty]
@@ -32,6 +36,20 @@ namespace ElementMusic.Models.ElementAPI
         private int? _order;
         [ObservableProperty]
         private bool? _liked;
+
+        [RelayCommand]
+        private async void SetLike()
+        {
+            await App.APISender.SendRequest("MusicInteraction.php?F=LIKE", HttpMethod.Post, new Dictionary<string, object>
+            {
+                { "SongID", ID}
+            });
+            Liked = !Liked;
+        }
+
+        [RelayCommand]
+        private void ToQueue() =>
+            App.GetService<MainWindowViewModel>().SongPlayerViewModel.AddToQueue(this);
     }
 
     public partial class SongImages : ObservableObject

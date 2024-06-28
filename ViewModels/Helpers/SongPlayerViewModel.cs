@@ -7,8 +7,10 @@ namespace ElementMusic.ViewModels.Helpers
 {
     public partial class SongPlayerViewModel : ObservableObject
     {
-        private readonly MediaPlayer _mediaPlayer 
-            = new MediaPlayer();
+        private readonly MediaPlayer _mediaPlayer
+            = new();
+        private readonly DispatcherTimer _timer =
+            new();
 
         private Song _currentSong;
         public Song CurrentSong
@@ -22,8 +24,8 @@ namespace ElementMusic.ViewModels.Helpers
             }
         }
 
-        private Queue<Song> _songQueue
-            = new Queue<Song>();
+        private LinkedList<Song> _playedSongs =
+            new();
 
         [ObservableProperty]
         private bool _songLoaded;
@@ -36,7 +38,13 @@ namespace ElementMusic.ViewModels.Helpers
         [ObservableProperty]
         private int _volume;
         [ObservableProperty]
-        private bool _isVolumeMenuOpen;
+        private bool _backwardEnabled;
+        [ObservableProperty]
+        private bool _forwardEnabled;
+
+        [ObservableProperty]
+        private FlyoutViewModel _flyoutViewModel =
+            new();
 
         private bool _paused;
         private bool _ignoreChange;
@@ -45,12 +53,12 @@ namespace ElementMusic.ViewModels.Helpers
         {
             Volume = (int)(_mediaPlayer.Volume * 100);
 
+            _timer.Interval = TimeSpan.FromMilliseconds(1);
+            _timer.Tick += Timer_Tick;
+
             _mediaPlayer.MediaOpened += (_, _) =>
             {
-                DispatcherTimer timer = new DispatcherTimer();
-                timer.Interval = TimeSpan.FromSeconds(1);
-                timer.Tick += Timer_Tick;
-                timer.Start();
+                _timer.Start();
             };
         }
 
@@ -61,15 +69,24 @@ namespace ElementMusic.ViewModels.Helpers
             _ignoreChange = false;
             PlayingProgressLabel = $"{_mediaPlayer.Position:mm\\:ss} / {_mediaPlayer.NaturalDuration.TimeSpan:mm\\:ss}";
 
-            if(PlayingProgress >= 100 && _songQueue.TryPeek(out var song))
+            var currentSongNode = _playedSongs.Find(CurrentSong);
+
+            BackwardEnabled = currentSongNode.Previous != null;
+            ForwardEnabled = currentSongNode.Next != null;
+
+            if (PlayingProgress >= 100 && currentSongNode.Next?.Value != null)
             {
-                CurrentSong = song;
-                Play();
+                Skip(currentSongNode.Next.Value, false);
             }
+            else if (PlayingProgress >= 100 && (_playedSongs == null || currentSongNode.Next?.Value == null)) 
+                Stop();
         }
 
-        public void AddToQueue(Song song) =>
-            _songQueue.Enqueue(song);
+        public void AddToQueue(Song song)
+        {
+            _playedSongs.AddLast(song);
+            ForwardEnabled = true;
+        }
 
         public void PlayingProgressChanged()
         {
@@ -82,6 +99,26 @@ namespace ElementMusic.ViewModels.Helpers
         public void VolumeChanged() =>
             _mediaPlayer.Volume = (double)Volume / 100;
 
+        public LinkedList<Song>? GetPlayedSongs() => _playedSongs;
+
+        public void StartFromNew(Song song)
+        {
+            Stop();
+            _playedSongs.AddLast(song);
+            CurrentSong = song;
+            Play();
+        }
+
+        public void Skip(Song song, bool addToPlayedSongs = true)
+        {
+            _timer.Stop();
+            _mediaPlayer.Stop();
+            if(addToPlayedSongs) 
+                _playedSongs.AddLast(song);
+            CurrentSong = song;
+            Play();
+        }
+
         [RelayCommand]
         private void Play()
         {
@@ -92,7 +129,7 @@ namespace ElementMusic.ViewModels.Helpers
         }
 
         [RelayCommand]
-        private void Pause() 
+        private void Pause()
         {
             _mediaPlayer.Pause();
             Playing = false;
@@ -100,10 +137,36 @@ namespace ElementMusic.ViewModels.Helpers
         }
 
         [RelayCommand]
-        private void OpenVolumeMenu() 
+        private void Stop()
         {
-            if (!IsVolumeMenuOpen)
-                IsVolumeMenuOpen = true;       
+            _timer.Stop();
+            _mediaPlayer.Stop();
+            CurrentSong = null;
+            SongLoaded = false;
+            Playing = false;
+            _paused = false;
+        }
+
+        [RelayCommand]
+        private void GoBackwardSong()
+        {
+            if (_playedSongs.Count > 1)
+            {
+                var prev = _playedSongs.Find(CurrentSong)?.Previous?.Value;
+                Skip(prev, false);
+            }
+            else BackwardEnabled = false;
+        }
+
+        [RelayCommand]
+        private void GoForwardSong()
+        {
+            if (_playedSongs.Find(CurrentSong)?.Next != null)
+            {
+                var next = _playedSongs.Find(CurrentSong)?.Next?.Value;
+                Skip(next, false);
+            }
+            else BackwardEnabled = false;
         }
 
         [RelayCommand]
