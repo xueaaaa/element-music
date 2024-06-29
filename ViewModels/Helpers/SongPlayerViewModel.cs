@@ -1,4 +1,5 @@
 ﻿using ElementMusic.Models.ElementAPI;
+using ElementMusic.ViewModels.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
 using MessageBox = Wpf.Ui.Controls.MessageBox;
@@ -34,7 +35,9 @@ namespace ElementMusic.ViewModels.Helpers
         [ObservableProperty]
         private double _playingProgress;
         [ObservableProperty]
-        private string _playingProgressLabel = "--:-- / --:--";
+        private string _playedLabel = "--:--";
+        [ObservableProperty]
+        private string _durationLabel = "--:--";
         [ObservableProperty]
         private int _volume;
         [ObservableProperty]
@@ -67,7 +70,8 @@ namespace ElementMusic.ViewModels.Helpers
             _ignoreChange = true;
             PlayingProgress = _mediaPlayer.Position.TotalSeconds / _mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds * 100;
             _ignoreChange = false;
-            PlayingProgressLabel = $"{_mediaPlayer.Position:mm\\:ss} / {_mediaPlayer.NaturalDuration.TimeSpan:mm\\:ss}";
+            PlayedLabel = $"{_mediaPlayer.Position:mm\\:ss}";
+            DurationLabel = $"-{_mediaPlayer.NaturalDuration.TimeSpan - _mediaPlayer.Position:mm\\:ss}";
 
             var currentSongNode = _playedSongs.Find(CurrentSong);
 
@@ -84,8 +88,13 @@ namespace ElementMusic.ViewModels.Helpers
 
         public void AddToQueue(Song song)
         {
-            _playedSongs.AddLast(song);
-            ForwardEnabled = true;
+            if (!_playedSongs.Contains(song))
+            {
+                _playedSongs.AddLast(song);
+                ForwardEnabled = true;
+            }
+            else App.GetService<MainWindowViewModel>().InfoBarViewModel
+                    .ErrorTemplate(Application.Current.Resources["AlreadyInQueue"].ToString());
         }
 
         public void PlayingProgressChanged()
@@ -104,6 +113,8 @@ namespace ElementMusic.ViewModels.Helpers
         public void StartFromNew(Song song)
         {
             Stop();
+            if (_playedSongs.Contains(song))
+                _playedSongs.Remove(song);
             _playedSongs.AddLast(song);
             CurrentSong = song;
             Play();

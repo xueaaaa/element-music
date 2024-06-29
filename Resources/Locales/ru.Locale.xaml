@@ -49,4 +49,5 @@
     <v:String x:Key="InfoBarErrorTitle">Ошибка</v:String>
 
     <v:String x:Key="IncorrectEmailError">Некорректный адрес электронной почты</v:String>
+    <v:String x:Key="AlreadyInQueue">Эта песня уже находится в очереди или играла раньше</v:String>
 </ResourceDictionary>

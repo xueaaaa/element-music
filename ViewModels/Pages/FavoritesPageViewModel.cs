@@ -14,6 +14,9 @@ namespace ElementMusic.ViewModels.Pages
         [ObservableProperty]
         private InfoBarViewModel _infoBarViewModel;
 
+        private bool _onceSearched;
+        private ObservableCollection<Song> _orig;
+
         public void OnNavigatedFrom() { }
 
         public void OnNavigatedTo() { }
@@ -23,11 +26,20 @@ namespace ElementMusic.ViewModels.Pages
         {
             var page = App.GetService<FavoritesPage>();
 
-            if (param.ToString() == string.Empty) return;
+            if (!_onceSearched)
+                _orig = page.SongCarousel.Source;
 
-            page.SongCarousel.Source = page.SongCarousel.Source.Where(s => 
-            s.Title.StartsWith(param.ToString()) || s.Title.EndsWith(param.ToString())) 
-                as ObservableCollection<Song>;
+            if (param.ToString() == string.Empty)
+            {
+                page.SongCarousel.Source = _orig;
+                _onceSearched = false;
+                return;
+            }
+
+            var ne = new ObservableCollection<Song>(page.SongCarousel.Source.Where(s =>
+            s.Title.ToLower().StartsWith(param.ToString().ToLower())));
+            page.SongCarousel.Source = ne;
+            _onceSearched = true;
         }
     }
 }

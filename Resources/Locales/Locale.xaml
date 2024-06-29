@@ -49,4 +49,5 @@
     <v:String x:Key="InfoBarErrorTitle">Error</v:String>
 
     <v:String x:Key="IncorrectEmailError">Incorrect email address</v:String>
+    <v:String x:Key="AlreadyInQueue">This song is already in the queue or has been played before</v:String>
 </ResourceDictionary>
