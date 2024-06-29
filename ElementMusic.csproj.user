@@ -13,6 +13,9 @@
     <Compile Update="Views\Controls\SongCarousel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\FavoritesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Pages\MainPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Controls\SongCarousel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Pages\FavoritesPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Pages\MainPage.xaml">

@@ -13,6 +13,8 @@
     <v:String x:Key="SaveFormLabel">Save the data for future authorizations</v:String>
     <v:String x:Key="SaveFormToolTip">If you enable this option, when the session expires, Element Music will automatically create a new one with the saved parameters.</v:String>
 
+    <v:String x:Key="ToFavoriteButton">Add to favorite</v:String>
+    <v:String x:Key="FromFavoriteButton">Remove from favorite</v:String>
     <v:String x:Key="ToQueueButton">Add to queue...</v:String>
     <v:String x:Key="SongInfoHeader">More Info</v:String>
     <v:String x:Key="SongTitleLabel">Song title</v:String>
@@ -24,6 +26,10 @@
 
     <v:String x:Key="RecentlyAddedHeader">Recently added</v:String>
     <v:String x:Key="RandomHeader">Random</v:String>
+    <v:String x:Key="FavoritesHeader">Favorites</v:String>
+    <v:String x:Key="SearchToolTip">Start typing in the song title...</v:String>
+    <v:String x:Key="AllToQueueToolTip">Add all songs from this list to the queue</v:String>
+    <v:String x:Key="ReloadToolTip">Reload</v:String>
     <v:String x:Key="LoadMoreToolTip">Load more</v:String>
 
     <v:String x:Key="PersonalizationGroupHeader">Personalization</v:String>

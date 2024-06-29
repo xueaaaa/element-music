@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:ElementMusic.Views.Controls"
-      Tag="{Binding ElementName=Grid, Path=SongType}"
       Name="Grid"
       mc:Ignorable="d">
     <Grid>
@@ -21,11 +20,12 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         
                         <ui:Button Margin="0 0 7 0"
                                    Icon="{ui:SymbolIcon ArrowLeft24}"
-                                   Click="Button_Click"
+                                   Click="ScrollLeftButtonClick"
                                    Appearance="Transparent"/>
 
                         <ScrollViewer Grid.Column="1"
@@ -35,17 +35,30 @@
                             <ItemsPresenter/>
                         </ScrollViewer>
 
-                        <ui:Button Grid.Column="2"
-                                   Click="Button_Click_2"
-                                   Margin="5 0 0 0"
-                                   VerticalAlignment="Center"
-                                   ToolTip="{DynamicResource LoadMoreToolTip}"
-                                   Icon="{ui:SymbolIcon Add24}"
-                                   Appearance="Light"/>
+                        <StackPanel Grid.Column="2"
+                                    Margin="5 0 0 0"
+                                    VerticalAlignment="Center">
+                            <ui:Button Margin="0 0 0 5"
+                                       Click="AddAllToQueueButtonClick"
+                                       ToolTip="{DynamicResource AllToQueueToolTip}"
+                                       Icon="{ui:SymbolIcon Stack24}"
+                                       Appearance="Light"/>
+
+                            <ui:Button Margin="0 0 0 5"
+                                       Click="ReloadButtonClick"
+                                       ToolTip="{DynamicResource ReloadToolTIp}"
+                                       Icon="{ui:SymbolIcon ArrowCounterClockwise24}"
+                                       Appearance="Light"/>
+
+                            <ui:Button Click="LoadMoreButtonClick"
+                                       ToolTip="{DynamicResource LoadMoreToolTip}"
+                                       Icon="{ui:SymbolIcon Add24}"
+                                       Appearance="Light"/>
+                        </StackPanel>
 
                         <ui:Button Margin="7 0 0 0"
-                                   Grid.Column="3"
-                                   Click="Button_Click_1"
+                                   Grid.Column="4"
+                                   Click="ScrollRightButtonClick"
                                    Icon="{ui:SymbolIcon ArrowRight24}"
                                    Appearance="Transparent"/>
                     </Grid>

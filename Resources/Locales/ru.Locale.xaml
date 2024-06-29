@@ -13,6 +13,8 @@
     <v:String x:Key="SaveFormLabel">Сохранить данные для последующих авторизаций</v:String>
     <v:String x:Key="SaveFormToolTip">При включении данного параметра по истечению срока действия сессии Element Music автоматически создаст новую с сохранёнными параметрами.</v:String>
 
+    <v:String x:Key="ToFavoriteButton">В избранное</v:String>
+    <v:String x:Key="FromFavoriteButton">Из избранного</v:String>
     <v:String x:Key="ToQueueButton">В очередь...</v:String>
     <v:String x:Key="SongInfoHeader">Подробная информация</v:String>
     <v:String x:Key="SongTitleLabel">Название</v:String>
@@ -24,6 +26,10 @@
 
     <v:String x:Key="RecentlyAddedHeader">Недавно добавленное</v:String>
     <v:String x:Key="RandomHeader">Случайное</v:String>
+    <v:String x:Key="FavoritesHeader">Избранное</v:String>
+    <v:String x:Key="SearchToolTip">Начните вводить название песни...</v:String>
+    <v:String x:Key="AllToQueueToolTip">Добавить все песни из этого списка в очередь</v:String>
+    <v:String x:Key="ReloadToolTip">Перезагрузить</v:String>
     <v:String x:Key="LoadMoreToolTip">Загрузить ещё</v:String>
 
     <v:String x:Key="PersonalizationGroupHeader">Персонализация</v:String>

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Windows.Controls;
 using ElementMusic.Models.ElementAPI;
+using ElementMusic.ViewModels.Windows;
 
 namespace ElementMusic.Views.Controls
 {
@@ -36,47 +37,52 @@ namespace ElementMusic.Views.Controls
         public SongCarousel()
         {
             InitializeComponent();
-            LoadSongs();
+            
+            Loaded += (_, _) =>
+            {
+                if(Source == null || Source.Count == 0)
+                    LoadSongs();
+            };
         }
 
         public async void LoadSongs(bool startsFromLast = false)
         {
-            string type = string.Empty;
-            switch ((SongType)Tag)
+            string f = string.Empty;
+            switch (SongType)
             {
                 case SongType.Latest:
-                    type = "LATEST";
+                    f = "LATEST";
                     break;
                 case SongType.Random:
-                    type = "RANDOM";
+                    f = "RANDOM";
                     break;
                 case SongType.Favorites:
-                    type = "FAVORITES";
+                    f = "FAVORITES";
                     break;
                 default:
-                    type = "LATEST";
+                    f = "LATEST";
                     break;
             }
 
-            HttpResponseMessage? obj = await App.APISender.SendRequest($"LoadSongs.php?F={type}", HttpMethod.Post, new Dictionary<string, object>()
+            HttpResponseMessage? obj = await App.APISender.SendRequest($"LoadSongs.php?F={f}", HttpMethod.Post, new Dictionary<string, object>()
             {
                 { "StartIndex", startsFromLast ? Source.Count : 0 }
             });
             ObservableCollection<Song>? songs = JsonSerializer.Deserialize<ObservableCollection<Song>?>(await obj.Content.ReadAsStringAsync());
 
-            if (Source != null)
+            if (Source != null && startsFromLast)
                 foreach (var item in songs)
                     Source.Add(item);
             else Source = songs;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ScrollLeftButtonClick(object sender, RoutedEventArgs e)
         {
             var scrollViewer = GetScrollViewer();
             scrollViewer?.LineLeft();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ScrollRightButtonClick(object sender, RoutedEventArgs e)
         {
             var scrollViewer = GetScrollViewer();
             scrollViewer?.LineRight();
@@ -88,7 +94,17 @@ namespace ElementMusic.Views.Controls
             return template.FindName("SongsScrollViewer", SongsControl) as ScrollViewer;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e) =>
+        private void LoadMoreButtonClick(object sender, RoutedEventArgs e) =>
             LoadSongs(true);
+
+        private void AddAllToQueueButtonClick(object sender, RoutedEventArgs e) 
+        {
+            var player = App.GetService<MainWindowViewModel>().SongPlayerViewModel;
+            foreach (var item in Source)
+                player.AddToQueue(item);
+        }
+
+        private void ReloadButtonClick(object sender, RoutedEventArgs e) =>
+            LoadSongs();
     }
 }

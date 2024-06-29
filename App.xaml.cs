@@ -47,6 +47,8 @@ namespace ElementMusic
 
                 services.AddSingleton<MainPage>();
                 services.AddSingleton<MainPageViewModel>();
+                services.AddSingleton<FavoritesPage>();
+                services.AddSingleton<FavoritesPageViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
             }).Build();

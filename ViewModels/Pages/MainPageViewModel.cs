@@ -1,5 +1,4 @@
-﻿using ElementMusic.Models.ElementAPI;
-using ElementMusic.ViewModels.Helpers;
+﻿using ElementMusic.ViewModels.Helpers;
 using Wpf.Ui.Controls;
 
 namespace ElementMusic.ViewModels.Pages
