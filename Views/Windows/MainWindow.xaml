@@ -145,11 +145,11 @@
 
             <ui:Card Grid.Column="1"
                      Padding="0"
-                     MinWidth="350"
+                     MinWidth="450"
                      HorizontalAlignment="Center">
-                <Grid MinWidth="350">
+                <Grid MinWidth="450">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -157,20 +157,21 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <ui:Image Grid.RowSpan="3"
                               HorizontalAlignment="Left"
                               RenderOptions.BitmapScalingMode="Fant"
                               Height="70" Width="70"
+                              Margin="0 -7"
                               Stretch="Fill"
                               Source="{Binding CurrentSong.Cover.SimpleImage, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"/>
 
                     <StackPanel Grid.Column="1"
-                                Grid.ColumnSpan="2"
+                                Grid.ColumnSpan="3"
                                 Grid.RowSpan="2"
-                                Margin="15 3 0 0"
+                                Margin="0 3 0 0"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Top">
                         <ui:TextBlock FontTypography="BodyStrong"
@@ -198,6 +199,20 @@
                                    Appearance="Transparent"
                                    BorderThickness="0"/>
                     </Grid>
+
+                    <Slider Style="{DynamicResource MusicSliderStyle}"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="3"
+                            Grid.Row="2"
+                            Minimum="0"
+                            Maximum="100"
+                            Margin="0 0 0 -7.3"
+                            IsSelectionRangeEnabled="True"
+                            IsMoveToPointEnabled="True"
+                            SelectionStart="0"
+                            SelectionEnd="{Binding PlayingProgress}"
+                            Value="{Binding PlayingProgress}"
+                            ValueChanged="Slider_ValueChanged"/>
                 </Grid>
             </ui:Card>
 

@@ -13,6 +13,7 @@
                 <ui:ControlsDictionary />
 
                 <ResourceDictionary Source="Resources/Locales/Locale.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/MusicSliderStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

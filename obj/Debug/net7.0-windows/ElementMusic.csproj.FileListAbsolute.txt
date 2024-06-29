@@ -71,3 +71,6 @@ D:\C#\ElementMusic\obj\Debug\net7.0-windows\ElementMusic.genruntimeconfig.cache
 D:\C#\ElementMusic\obj\Debug\net7.0-windows\ref\ElementMusic.dll
 D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Pages\FavoritesPage.g.cs
 D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Pages\FavoritesPage.baml
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\Resources\Styles\MusicSliderStyle.baml
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Controls\MusicSlider.g.cs
+D:\C#\ElementMusic\obj\Debug\net7.0-windows\Views\Controls\MusicSlider.baml

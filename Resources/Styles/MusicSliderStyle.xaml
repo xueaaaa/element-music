@@ -1,0 +1,131 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    
+    <Style x:Key="MusicSliderRBStyle"
+           TargetType="{x:Type RepeatButton}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="IsTabStop"
+                Value="false" />
+        <Setter Property="Focusable"
+                Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent"
+                            Width="0" Height="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MusicSliderThumbStyle"
+           TargetType="{x:Type Thumb}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="Height"
+                Value="20" />
+        <Setter Property="Width"
+                Value="0" />
+        <Setter Property="Visibility" 
+                Value="Hidden"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle Fill="{ui:ThemeResource TextFillColorPrimaryBrush}"
+                               Height="20"
+                               Width="5"
+                               Margin="-5 0 0 12"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="MusicSlider"
+                     TargetType="{x:Type Slider}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"
+                               MinHeight="{TemplateBinding MinHeight}" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Border x:Name="TrackBackground"
+                        Margin="0"
+                        Height="4"
+                        BorderThickness="0"
+                        Background="{ui:ThemeResource TextFillColorTertiaryBrush}"/>
+
+                <Decorator Name="PART_SelectionRange" 
+                           HorizontalAlignment="Left"
+                           Height="4">
+                    <Rectangle Name="PART_SelectionBackground" Fill="{ui:ThemeResource AccentTextFillColorTertiaryBrush}" 
+                               HorizontalAlignment="Stretch"/>
+                </Decorator>
+            </Grid>
+
+            <Track x:Name="PART_Track">
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource MusicSliderThumbStyle}"
+                           x:Name="PART_Thumb"/>
+                </Track.Thumb>
+            </Track>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Thumb"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation To="6"
+                                         Duration="0:0:0.05"
+                                         Storyboard.TargetName="TrackBackground"
+                                         Storyboard.TargetProperty="Height"/>
+                        <DoubleAnimation To="6"
+                                         Duration="0:0:0.05"
+                                         Storyboard.TargetName="PART_SelectionRange"
+                                         Storyboard.TargetProperty="Height"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Thumb"
+                                                       Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <DoubleAnimation To="4"
+                                         Duration="0:0:0.05"
+                                         Storyboard.TargetName="TrackBackground"
+                                         Storyboard.TargetProperty="Height"/>
+                        <DoubleAnimation To="4"
+                                         Duration="0:0:0.05"
+                                         Storyboard.TargetName="PART_SelectionRange"
+                                         Storyboard.TargetProperty="Height"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="MusicSliderStyle"
+           TargetType="{x:Type Slider}">
+        <Setter Property="SnapsToDevicePixels"
+                Value="true" />
+        <Setter Property="OverridesDefaultStyle"
+                Value="true" />
+        <Setter Property="Template" Value="{StaticResource MusicSlider}"/>
+    </Style>
+</ResourceDictionary>

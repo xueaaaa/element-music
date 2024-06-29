@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="ElementMusic.Views.Controls.MusicSlider"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ElementMusic.Views.Controls"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             mc:Ignorable="d"
+             Name="Slider"
+             Height="{Binding ElementName=Slider, Path=SliderHeight}">
+    <UserControl.RenderTransform>
+        <ScaleTransform ScaleX="1" ScaleY="1"/>
+    </UserControl.RenderTransform>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation To="1.5"
+                                     Duration="0:0:0.1"
+                                     AccelerationRatio="0.10"
+                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation To="1"
+                                     Duration="0:0:0.1"
+                                     AccelerationRatio="0.10"
+                                     Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid>
+        <Rectangle x:Name="PART_SliderBackground"
+                   Height="{Binding ElementName=Slider, Path=SliderHeight}"
+                   d:Height="3" d:Width="150"
+                   Fill="{ui:ThemeResource TextFillColorSecondaryBrush}"/>
+        <Rectangle x:Name="PART_SliderActivePart"
+                   Width="{Binding ElementName=Slider, Path=ConvertedValue}"
+                   Fill="{ui:ThemeResource AccentTextFillColorPrimaryBrush}"/>
+    </Grid>
+</UserControl>
