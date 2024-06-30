@@ -34,6 +34,16 @@
     <v:String x:Key="ReloadToolTip">Reload</v:String>
     <v:String x:Key="LoadMoreToolTip">Load more</v:String>
 
+    <v:String x:Key="TitleToolTip">Title*</v:String>
+    <v:String x:Key="AlbumToolTip">Album</v:String>
+    <v:String x:Key="ArtistToolTip">Artist*</v:String>
+    <v:String x:Key="GenreToolTip">Genre</v:String>
+    <v:String x:Key="ReleaseYearToolTip">Release year</v:String>
+    <v:String x:Key="ComposerToolTip">Composer</v:String>
+    <v:String x:Key="PubTextToolTip">Publication text</v:String>
+    <v:String x:Key="AudioToolTip">Audio file*</v:String>
+    <v:String x:Key="CoverToolTip">Cover file</v:String>
+    
     <v:String x:Key="PersonalizationGroupHeader">Personalization</v:String>
     <v:String x:Key="ThemeGroupName">Theme</v:String>
     <v:String x:Key="LightThemeName">Light</v:String>

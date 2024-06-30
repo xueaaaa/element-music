@@ -55,7 +55,8 @@
                                        Icon="{ui:SymbolIcon Heart24}"
                                        TargetPageType="{x:Type pages:FavoritesPage}"/>
                 <ui:NavigationViewItem Content="{DynamicResource UploadPageTitle}"
-                                       Icon="{ui:SymbolIcon ArrowUpload24}"/>
+                                       Icon="{ui:SymbolIcon ArrowUpload24}"
+                                       TargetPageType="{x:Type pages:UploadPage}"/>
             </ui:NavigationView.MenuItems>
             <ui:NavigationView.FooterMenuItems>
                 <ui:NavigationViewItem Content="{DynamicResource SettingsPageTitle}"

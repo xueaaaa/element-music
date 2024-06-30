@@ -31,7 +31,8 @@
                 
                 <ui:TextBox VerticalAlignment="Center"
                             PlaceholderText="{DynamicResource SearchToolTip}"
-                            Text="{Binding ViewModel.SearchText}"/>
+                            Text="{Binding ViewModel.SearchText}"
+                            Icon="{ui:SymbolIcon Search24}"/>
                 <ui:Button Grid.Column="1"
                            Appearance="Primary"
                            Margin="7 0 0 0"

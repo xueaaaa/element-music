@@ -34,6 +34,16 @@
     <v:String x:Key="ReloadToolTip">Перезагрузить</v:String>
     <v:String x:Key="LoadMoreToolTip">Загрузить ещё</v:String>
 
+    <v:String x:Key="TitleToolTip">Название*</v:String>
+    <v:String x:Key="AlbumToolTip">Альбом</v:String>
+    <v:String x:Key="ArtistToolTip">Исполнитель*</v:String>
+    <v:String x:Key="GenreToolTip">Жанр</v:String>
+    <v:String x:Key="ReleaseYearToolTip">Год выхода</v:String>
+    <v:String x:Key="ComposerToolTip">Композитор</v:String>
+    <v:String x:Key="PubTextToolTip">Текст публикации</v:String>
+    <v:String x:Key="AudioToolTip">Аудиофайл*</v:String>
+    <v:String x:Key="CoverToolTip">Файл обложки</v:String>
+
     <v:String x:Key="PersonalizationGroupHeader">Персонализация</v:String>
     <v:String x:Key="ThemeGroupName">Тема</v:String>
     <v:String x:Key="LightThemeName">Светлая</v:String>

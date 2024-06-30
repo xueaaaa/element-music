@@ -9,8 +9,10 @@ namespace ElementMusic.Views.Pages
 
         public FavoritesPage(FavoritesPageViewModel viewModel)
         {
-            InitializeComponent();
             ViewModel = viewModel;
+            DataContext = this;
+
+            InitializeComponent();
         }
 
         private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
