@@ -24,6 +24,7 @@
     <v:String x:Key="FormatLabel">Format</v:String>
     <v:String x:Key="CloseButton">Close</v:String>
 
+    <v:String x:Key="SearchButton">Search</v:String>
     <v:String x:Key="RecentlyAddedHeader">Recently added</v:String>
     <v:String x:Key="RandomHeader">Random</v:String>
     <v:String x:Key="FavoritesHeader">Favorites</v:String>

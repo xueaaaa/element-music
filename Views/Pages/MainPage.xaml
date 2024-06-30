@@ -23,7 +23,27 @@
         </Grid.RowDefinitions>
 
         <StackPanel>
-            <ui:TextBlock Margin="0 0 0 12"
+            <Grid Margin="0 0 0 12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <ui:TextBox VerticalAlignment="Center"
+                            PlaceholderText="{DynamicResource SearchToolTip}"
+                            Text="{Binding ViewModel.SearchText}"/>
+                <ui:Button Grid.Column="1"
+                           Appearance="Primary"
+                           Margin="7 0 0 0"
+                           VerticalAlignment="Center"
+                           Command="{Binding ViewModel.SearchCommand}"
+                           Content="{DynamicResource SearchButton}"/>
+            </Grid>
+            
+            <c:SongCarousel SongType="None"
+                            Source="{Binding ViewModel.SearchedSongs}"
+                            Visibility="{Binding ViewModel.SearchedCarouselVisibility}"/>
+            <ui:TextBlock Margin="0 36 0 12"
                           FontTypography="Title"
                           Text="{DynamicResource RecentlyAddedHeader}"/>
             <c:SongCarousel SongType="Latest"/>

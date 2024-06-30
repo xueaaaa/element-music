@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Icons\favicon.png" />
+    <None Remove="Resources\Images\empty_cover.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\Icons\favicon.png" />
+    <Resource Include="Resources\Images\empty_cover.jpg" />
   </ItemGroup>
 
   <ItemGroup>

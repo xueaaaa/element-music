@@ -24,6 +24,7 @@
     <v:String x:Key="FormatLabel">Формат</v:String>
     <v:String x:Key="CloseButton">Закрыть</v:String>
 
+    <v:String x:Key="SearchButton">Искать</v:String>
     <v:String x:Key="RecentlyAddedHeader">Недавно добавленное</v:String>
     <v:String x:Key="RandomHeader">Случайное</v:String>
     <v:String x:Key="FavoritesHeader">Избранное</v:String>

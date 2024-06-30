@@ -9,6 +9,7 @@ namespace ElementMusic.Views.Controls
 {
     public enum SongType
     {
+        None,
         Latest,
         Random,
         Favorites
@@ -50,6 +51,8 @@ namespace ElementMusic.Views.Controls
             string f = string.Empty;
             switch (SongType)
             {
+                case SongType.None:
+                    return;
                 case SongType.Latest:
                     f = "LATEST";
                     break;

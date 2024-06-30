@@ -14,5 +14,10 @@ namespace ElementMusic.Views.Pages
 
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            ViewModel.SearchCommand.Execute(((TextBox)sender).Text);
+        }
     }
 }

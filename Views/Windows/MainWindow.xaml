@@ -188,11 +188,15 @@
                                 VerticalAlignment="Top">
                         <ui:TextBlock FontTypography="BodyStrong"
                                       Text="{Binding CurrentSong.Title}"
-                                      HorizontalAlignment="Center"/>
+                                      HorizontalAlignment="Center"
+                                      MaxWidth="200"
+                                      TextTrimming="CharacterEllipsis"/>
                         <ui:TextBlock FontTypography="Caption"
                                       Appearance="Secondary"
                                       Text="{Binding CurrentSong.Artist}"
-                                      HorizontalAlignment="Center"/>
+                                      HorizontalAlignment="Center"
+                                      MaxWidth="200"
+                                      TextTrimming="CharacterEllipsis"/>
                     </StackPanel>
 
                     <Grid Grid.Column="3"
@@ -242,24 +246,36 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
                 <ui:Button Command="{Binding ShowInfoCommand}"
-                           HorizontalAlignment="Center"
                            FontSize="18"
                            Icon="{ui:SymbolIcon Info24}"
                            Appearance="Transparent"
                            BorderThickness="0"/>
 
                 <ui:Button Margin="3 0 0 0"
-                           Command="{Binding FlyoutViewModel.OpenCommand}"
-                           HorizontalAlignment="Center"
+                           Command="{Binding VolumeFlyoutViewModel.OpenCommand}"
                            FontSize="18"
                            Icon="{ui:SymbolIcon Megaphone24}"
                            Appearance="Transparent"
                            BorderThickness="0"/>
 
-                <ui:Flyout IsOpen="{Binding FlyoutViewModel.IsOpened, Mode=TwoWay}">
+                <ui:Button Margin="3 0 0 0"
+                           IsEnabled="False"
+                           Command="{Binding QueueFlyoutViewModel.OpenCommand}"
+                           FontSize="18"
+                           Icon="{ui:SymbolIcon AppsList24}"
+                           Appearance="Transparent"
+                           BorderThickness="0"/>
+
+                <ui:Flyout IsOpen="{Binding VolumeFlyoutViewModel.IsOpened, Mode=TwoWay}"
+                           Placement="Bottom">
                     <StackPanel>
                         <Slider Orientation="Vertical"
                                 HorizontalAlignment="Center"
+                                TickFrequency="10"
+                                TickPlacement="Both"
+                                IsSelectionRangeEnabled="True"
+                                SelectionStart="0"
+                                SelectionEnd="{Binding Volume}"
                                 Minimum="0"
                                 Maximum="100"
                                 Value="{Binding Volume}"
@@ -268,6 +284,36 @@
                                       HorizontalAlignment="Center"
                                       Text="{Binding Volume}"/>
                     </StackPanel>
+                </ui:Flyout>
+
+                <ui:Flyout IsOpen="{Binding QueueFlyoutViewModel.IsOpened, Mode=TwoWay}"
+                           Placement="Bottom">
+                    <ui:ListView ItemsSource="{Binding PlayedSongs}">
+                        <ui:ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ui:Image Height="50"
+                                              Width="50"
+                                              RenderOptions.BitmapScalingMode="Fant"
+                                              Source="{Binding Cover.SimpleImage, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"/>
+
+                                    <StackPanel Grid.Column="1"
+                                                Margin="7 0 0 0">
+                                        <ui:TextBlock FontTypography="BodyStrong"
+                                                      Text="{Binding Title}"/>
+                                        <ui:TextBlock FontTypography="Caption"
+                                                      Appearance="Secondary"
+                                                      Text="{Binding Artist}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ui:ListView.ItemTemplate>
+                    </ui:ListView>
                 </ui:Flyout>
             </StackPanel>
         </Grid>

@@ -8,9 +8,9 @@ namespace ElementMusic.Helpers
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (parameter.ToString() == "CoverUri")
-                return $"https://elemsocial.com/Content/Music/Covers/{value}";
+                return value == string.Empty ? "Resources/Images/empty_cover.jpg" : $"https://elemsocial.com/Content/Music/Covers/{value}";
             else if (parameter.ToString() == "SimpleCoverUri")
-                return $"https://elemsocial.com/Content/Simple/{value}";
+                return value == string.Empty ? "Resources/Images/empty_cover.jpg" : $"https://elemsocial.com/Content/Simple/{value}";
 
             return string.Empty;
         }
