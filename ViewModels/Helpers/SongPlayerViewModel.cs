@@ -1,5 +1,6 @@
 ﻿using ElementMusic.Models.ElementAPI;
 using ElementMusic.ViewModels.Windows;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using System.Windows.Threading;
 using MessageBox = Wpf.Ui.Controls.MessageBox;
@@ -25,9 +26,13 @@ namespace ElementMusic.ViewModels.Helpers
             }
         }
 
-        [ObservableProperty]
         private LinkedList<Song> _playedSongs =
             new();
+
+        public ObservableCollection<Song> PlayedSongsPublic
+        {
+            get => new(_playedSongs.Reverse());
+        }
 
         [ObservableProperty]
         private bool _songLoaded;
@@ -77,7 +82,7 @@ namespace ElementMusic.ViewModels.Helpers
             PlayedLabel = $"{_mediaPlayer.Position:mm\\:ss}";
             DurationLabel = $"-{_mediaPlayer.NaturalDuration.TimeSpan - _mediaPlayer.Position:mm\\:ss}";
 
-            var currentSongNode = PlayedSongs.Find(CurrentSong);
+            var currentSongNode = _playedSongs.Find(CurrentSong);
 
             BackwardEnabled = currentSongNode.Previous != null;
             ForwardEnabled = currentSongNode.Next != null;
@@ -86,16 +91,16 @@ namespace ElementMusic.ViewModels.Helpers
             {
                 Skip(currentSongNode.Next.Value, false);
             }
-            else if (PlayingProgress >= 100 && (PlayedSongs == null || currentSongNode.Next?.Value == null)) 
+            else if (PlayingProgress >= 100 && (_playedSongs == null || currentSongNode.Next?.Value == null)) 
                 Stop();
         }
 
         public void AddToQueue(Song song)
         {
-            if (!PlayedSongs.Contains(song))
+            if (!_playedSongs.Contains(song))
             {
-                PlayedSongs.AddLast(song);
-                OnPlayedSongsChanged(PlayedSongs);
+                _playedSongs.AddLast(song);
+                OnPropertyChanged(nameof(PlayedSongsPublic));
                 ForwardEnabled = true;
             }
             else App.GetService<MainWindowViewModel>().InfoBarViewModel
@@ -115,34 +120,38 @@ namespace ElementMusic.ViewModels.Helpers
 
         public void StartFromNew(Song song)
         {
+            var startTimer = song == CurrentSong;
+
             Stop();
-            if (PlayedSongs.Contains(song))
-                PlayedSongs.Remove(song);
-            PlayedSongs.AddLast(song);
-            OnPlayedSongsChanged(PlayedSongs);
+            if (_playedSongs.Contains(song))
+                _playedSongs.Remove(song);
+            _playedSongs.AddLast(song);
+            OnPropertyChanged(nameof(PlayedSongsPublic));
             CurrentSong = song;
-            Play();
+            Play(startTimer);
         }
 
+        [Obsolete("This method is outdated and should be removed with future updates.")]
         public void Skip(Song song, bool addToPlayedSongs = true)
         {
             _timer.Stop();
             _mediaPlayer.Stop();
             if (addToPlayedSongs)
             {
-                PlayedSongs.AddLast(song);
-                OnPlayedSongsChanged(PlayedSongs);
+                _playedSongs.AddLast(song);
+                OnPropertyChanged(nameof(PlayedSongsPublic));
             }
             CurrentSong = song;
             Play();
         }
 
         [RelayCommand]
-        private void Play()
+        private void Play(bool startTimer = false)
         {
             if (!_paused)
                 _mediaPlayer.Open(new Uri($"https://elemsocial.com/Content/Music/Files/{CurrentSong.File}"));
             _mediaPlayer.Play();
+            if (startTimer) _timer.Start();
             Playing = true;
         }
 
@@ -168,9 +177,9 @@ namespace ElementMusic.ViewModels.Helpers
         [RelayCommand]
         private void GoBackwardSong()
         {
-            if (PlayedSongs.Count > 1)
+            if (_playedSongs.Count > 1)
             {
-                var prev = PlayedSongs.Find(CurrentSong)?.Previous?.Value;
+                var prev = _playedSongs.Find(CurrentSong)?.Previous?.Value;
                 Skip(prev, false);
             }
             else BackwardEnabled = false;
@@ -179,9 +188,9 @@ namespace ElementMusic.ViewModels.Helpers
         [RelayCommand]
         private void GoForwardSong()
         {
-            if (PlayedSongs.Find(CurrentSong)?.Next != null)
+            if (_playedSongs.Find(CurrentSong)?.Next != null)
             {
-                var next = PlayedSongs.Find(CurrentSong)?.Next?.Value;
+                var next = _playedSongs.Find(CurrentSong)?.Next?.Value;
                 Skip(next, false);
             }
             else BackwardEnabled = false;

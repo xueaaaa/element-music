@@ -38,6 +38,10 @@ namespace ElementMusic.Models.ElementAPI
         private bool? _liked;
 
         [RelayCommand]
+        private void Play() =>
+            App.GetService<MainWindowViewModel>().SongPlayerViewModel.StartFromNew(this);
+
+        [RelayCommand]
         private async void SetLike()
         {
             await App.APISender.SendRequest("MusicInteraction.php?F=LIKE", HttpMethod.Post, new Dictionary<string, object>

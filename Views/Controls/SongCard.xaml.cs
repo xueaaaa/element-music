@@ -24,10 +24,7 @@ namespace ElementMusic.Views.Controls
             InitializeComponent();
         }
 
-        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            var player = App.GetService<MainWindowViewModel>().SongPlayerViewModel;
-            player.StartFromNew(Song);
-        }
+        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) =>
+            App.GetService<MainWindowViewModel>().SongPlayerViewModel.StartFromNew(Song);
     }
 }
