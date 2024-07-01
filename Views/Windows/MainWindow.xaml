@@ -14,7 +14,7 @@
                  d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=True}"
                  d:DesignHeight="450"
-                 d:DesignWidth="1400"
+                 d:DesignWidth="970"
                  ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
                  ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                  ExtendsContentIntoTitleBar="True"
@@ -125,6 +125,8 @@
                 <Grid HorizontalAlignment="Center"
                       Margin="3 0 3 0">
                     <ui:Button Command="{Binding PlayCommand}"
+                               CommandParameter="True"
+                               IsEnabled="True"
                                FontSize="18"
                                Icon="{ui:SymbolIcon Play24}"
                                Visibility="{Binding Playing, Converter={StaticResource InverseBooleanToVisibilityConverter}}"

@@ -43,6 +43,7 @@
     <v:String x:Key="PubTextToolTip">Publication text</v:String>
     <v:String x:Key="AudioToolTip">Audio file*</v:String>
     <v:String x:Key="CoverToolTip">Cover file</v:String>
+    <v:String x:Key="SendButton">Send</v:String>
     
     <v:String x:Key="PersonalizationGroupHeader">Personalization</v:String>
     <v:String x:Key="ThemeGroupName">Theme</v:String>
@@ -62,4 +63,5 @@
 
     <v:String x:Key="IncorrectEmailError">Incorrect email address</v:String>
     <v:String x:Key="AlreadyInQueue">This song is already in the queue or has been played before</v:String>
+    <v:String x:Key="FutureUpdates">This feature will be available in future updates</v:String>
 </ResourceDictionary>

@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.IO;
+using System.Net.Http;
 
 namespace ElementMusic.Models.ElementAPI
 {
@@ -11,6 +12,7 @@ namespace ElementMusic.Models.ElementAPI
         {
             _httpClient.BaseAddress = _baseUrl;
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "ElementAPI");
+            _httpClient.DefaultRequestHeaders.ExpectContinue = false;
 
             if (Properties.Settings.Default.SessionKey != null)
                 _httpClient.DefaultRequestHeaders.Add("S-KEY", Properties.Settings.Default.SessionKey);
@@ -36,7 +38,14 @@ namespace ElementMusic.Models.ElementAPI
                     foreach (var item in parameters)
                     {
                         if (item.Value is string s)
-                            formData.Add(new StringContent(s), item.Key);
+                            if (File.Exists(s))
+                            {
+                                var fileStream = File.OpenRead(s);
+                                var streamContent = new StreamContent(fileStream);
+                                formData.Add(streamContent, item.Key, Path.GetFileName(s));
+                            }
+                            else
+                                formData.Add(new StringContent(s), item.Key);
                         else
                             formData.Add(new StringContent(Convert.ToString(item.Value)), item.Key);
                     }

@@ -23,8 +23,8 @@ namespace ElementMusic.Models.ElementAPI
         private string _imageName;
 
         [ObservableProperty]
-        private byte[] _file;
+        private string _file;
         [ObservableProperty]
-        private byte[] _image;
+        private string _image;
     }
 }

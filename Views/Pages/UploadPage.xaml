@@ -10,10 +10,11 @@
                          IsDesignTimeCreatable=False}"
       d:DesignHeight="450"
       d:DesignWidth="800"
+      ToolTip="{DynamicResource FutureUpdates}"
       ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
       ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
       Foreground="{DynamicResource TextFillColorPrimaryBrush}">
-    <Grid>
+    <Grid IsEnabled="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -68,7 +69,7 @@
                             TextWrapping="Wrap"
                             AcceptsReturn="True"/>
 
-                <Grid>
+                <Grid Margin="0 0 0 14">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -110,7 +111,20 @@
                         </ui:Button>
                     </StackPanel>
                 </Grid>
+
+                <ui:Button HorizontalAlignment="Center"
+                           Margin="0 0 0 7"
+                           Content="{DynamicResource SendButton}"
+                           Appearance="Primary"
+                           Command="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=ViewModel.SendCommand}"/>
             </StackPanel>
         </ui:Card>
+
+        <ui:InfoBar Grid.Row="1"
+                    DataContext="{Binding ViewModel.InfoBarViewModel}"
+                    Title="{Binding Title}"
+                    Message="{Binding Message}"
+                    IsOpen="{Binding IsOpen, Mode=TwoWay}"
+                    Severity="{Binding Severity}"/>
     </Grid>
 </Page>

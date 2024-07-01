@@ -142,16 +142,16 @@ namespace ElementMusic.ViewModels.Helpers
                 OnPropertyChanged(nameof(PlayedSongsPublic));
             }
             CurrentSong = song;
-            Play();
+            Play(false);
         }
 
         [RelayCommand]
-        private void Play(bool startTimer = false)
+        private void Play(object startTimer)
         {
             if (!_paused)
                 _mediaPlayer.Open(new Uri($"https://elemsocial.com/Content/Music/Files/{CurrentSong.File}"));
             _mediaPlayer.Play();
-            if (startTimer) _timer.Start();
+            if (Convert.ToBoolean(startTimer)) _timer.Start();
             Playing = true;
         }
 
@@ -159,6 +159,7 @@ namespace ElementMusic.ViewModels.Helpers
         private void Pause()
         {
             _mediaPlayer.Pause();
+            _timer.Stop();
             Playing = false;
             _paused = true;
         }

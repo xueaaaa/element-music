@@ -43,6 +43,7 @@
     <v:String x:Key="PubTextToolTip">Текст публикации</v:String>
     <v:String x:Key="AudioToolTip">Аудиофайл*</v:String>
     <v:String x:Key="CoverToolTip">Файл обложки</v:String>
+    <v:String x:Key="SendButton">Отправить</v:String>
 
     <v:String x:Key="PersonalizationGroupHeader">Персонализация</v:String>
     <v:String x:Key="ThemeGroupName">Тема</v:String>
@@ -62,4 +63,5 @@
 
     <v:String x:Key="IncorrectEmailError">Некорректный адрес электронной почты</v:String>
     <v:String x:Key="AlreadyInQueue">Эта песня уже находится в очереди или играла раньше</v:String>
+    <v:String x:Key="FutureUpdates">Эта функция будет доступна в будущих обновлениях</v:String>
 </ResourceDictionary>
