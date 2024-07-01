@@ -14,5 +14,8 @@ namespace ElementMusic.Views.Pages
 
             InitializeComponent();
         }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) =>
+            ViewModel.ChangeVolumeCommand.Execute(null);
     }
 }

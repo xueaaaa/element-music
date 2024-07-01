@@ -9,7 +9,7 @@
       Title="SettingsPage"
       d:DataContext="{d:DesignInstance local:SettingsPage,
                                      IsDesignTimeCreatable=False}"
-      d:DesignHeight="450"
+      d:DesignHeight="500"
       d:DesignWidth="800"
       ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
       ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -45,12 +45,35 @@
                   DisplayMemberPath="DisplayName"
                   SelectedValuePath="Tag"/>
 
+        <TextBlock Margin="0 12 0 0"
+                   Text="{DynamicResource VolumeLabel}"/>
+        <Grid Margin="0 12 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Slider Minimum="0"
+                    Maximum="100"
+                    TickFrequency="5"
+                    TickPlacement="Both"
+                    Value="{Binding ViewModel.Volume}"
+                    ValueChanged="Slider_ValueChanged"/>
+            <ui:TextBlock Margin="7 0 0 0"
+                          Grid.Column="1"
+                          VerticalAlignment="Center"
+                          FontTypography="Caption"
+                          Appearance="Secondary"
+                          Text="{Binding ViewModel.Volume}"/>
+        </Grid>
+
         <StackPanel Margin="0 24 0 0"
                     Orientation="Horizontal">
             <ui:Button Command="{Binding ViewModel.LogoutCommand}"
                        Appearance="Danger"
                        Content="{DynamicResource LogoutButton}"/>
             <ui:TextBlock Margin="8 0 0 0"
+                          MaxWidth="550"
                           Appearance="Secondary"
                           VerticalAlignment="Center"
                           TextWrapping="Wrap"
@@ -65,6 +88,8 @@
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -84,11 +109,37 @@
 
                 <TextBlock Grid.Row="2"
                            FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Text="{DynamicResource SupportMusicCreatorLabel}"/>
+                <ui:HyperlinkButton Grid.Row="2"
+                                    Grid.Column="1"
+                                    Content="DonationAlerts"
+                                    Icon="{ui:SymbolIcon Dock24}"
+                                    NavigateUri="https://www.donationalerts.com/r/xueaaaa"/>
+
+                <TextBlock Grid.Row="3"
+                           FontWeight="Bold"
                            Text="{DynamicResource ElementAuthorLabel}"/>
-                <TextBlock Grid.Row="2"
+                <TextBlock Grid.Row="3"
                            Grid.Column="1"
                            Text="Xaromie"/>
+
+                <TextBlock Grid.Row="4"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Text="{DynamicResource SupportElementAuthorLabel}"/>
+                <ui:HyperlinkButton Grid.Row="4"
+                                    Grid.Column="1"
+                                    Content="Element Gold"
+                                    Icon="{ui:SymbolIcon Dock24}"
+                                    NavigateUri="https://elemsocial.com/goldsub"/>
             </Grid>
         </ui:CardExpander>
+
+        <ui:TextBlock Margin="0 12 0 0"
+                      Appearance="Tertiary"
+                      FontTypography="Caption"
+                      TextWrapping="Wrap"
+                      Text="{DynamicResource LegalInfoLabel}"/>
     </StackPanel>
 </Page>

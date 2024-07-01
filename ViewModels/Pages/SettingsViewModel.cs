@@ -1,5 +1,6 @@
 ﻿using ElementMusic.Models;
 using ElementMusic.ViewModels.Helpers;
+using ElementMusic.ViewModels.Windows;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using Wpf.Ui.Appearance;
@@ -65,6 +66,9 @@ namespace ElementMusic.ViewModels.Pages
             }
         }
 
+        [ObservableProperty]
+        private int _volume; 
+
         public void OnNavigatedTo()
         {
             if (!_isInitialized)
@@ -78,6 +82,7 @@ namespace ElementMusic.ViewModels.Pages
             CurrentTheme = ApplicationThemeManager.GetAppTheme();
             SelectedLanguage = Languages.Where(l => l.Tag == Properties.Settings.Default.Language.Name).First();
             AppVersion = $"{GetAssemblyVersion()}";
+            Volume = Properties.Settings.Default.Volume;
 
             _isInitialized = true;
         }
@@ -111,6 +116,14 @@ namespace ElementMusic.ViewModels.Pages
 
                     break;
             }
+        }
+
+        [RelayCommand]
+        private void ChangeVolume()
+        {
+            var player = App.GetService<MainWindowViewModel>().SongPlayerViewModel;
+            player.Volume = Volume;
+            player.VolumeChanged(true);
         }
 
         [RelayCommand]

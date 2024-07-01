@@ -69,7 +69,7 @@ namespace ElementMusic.Views.Windows
 
         private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            ViewModel.SongPlayerViewModel.VolumeChanged();
+            ViewModel.SongPlayerViewModel.VolumeChanged(true);
         }
     }
 }

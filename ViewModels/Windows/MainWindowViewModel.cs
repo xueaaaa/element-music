@@ -1,5 +1,6 @@
 ﻿using ElementMusic.Models.ElementAPI;
 using ElementMusic.ViewModels.Helpers;
+using ElementMusic.ViewModels.Pages;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Text.Json;
@@ -12,6 +13,8 @@ namespace ElementMusic.ViewModels.Windows
         private InfoBarViewModel _infoBarViewModel = new InfoBarViewModel();
         [ObservableProperty]
         private SongPlayerViewModel _songPlayerViewModel = new SongPlayerViewModel();
+        [ObservableProperty]
+        private  SettingsViewModel _settingsViewModel;
         [ObservableProperty]
         private bool _isAuthorized;
 
@@ -58,6 +61,8 @@ namespace ElementMusic.ViewModels.Windows
                 Login(null);
 
             SaveData = true;
+
+            SettingsViewModel = App.GetService<SettingsViewModel>();
 
             Properties.Settings.Default.PropertyChanged += (o, e) =>
             {

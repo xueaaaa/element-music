@@ -72,6 +72,12 @@ namespace ElementMusic.Views.Controls
                 { "StartIndex", startsFromLast ? Source.Count : 0 }
             });
             ObservableCollection<Song>? songs = JsonSerializer.Deserialize<ObservableCollection<Song>?>(await obj.Content.ReadAsStringAsync());
+            foreach (var item in songs)
+                if (item.Cover == null)
+                    item.Cover = new SongImages
+                    {
+                        SimpleImage = "/resources/images/empty_cover.jpg"
+                    }; 
 
             if (Source != null && startsFromLast)
                 foreach (var item in songs)

@@ -50,12 +50,16 @@
     <v:String x:Key="LightThemeName">Светлая</v:String>
     <v:String x:Key="DarkThemeName">Тёмная</v:String>
     <v:String x:Key="LanguageGroupName">Язык</v:String>
+    <v:String x:Key="VolumeLabel">Громкость</v:String>
     <v:String x:Key="LogoutButton">Выйти</v:String>
     <v:String x:Key="LogoutButtonLabel">Если у вас есть проблемы с загрузкой песен, или вы хотите перезайти с другого аккаунта, воспользуйтесь этой кнопкой.</v:String>
     <v:String x:Key="AboutHeader">Об Element Music</v:String>
     <v:String x:Key="VersionLabel">Версия приложения</v:String>
     <v:String x:Key="ApplicationAuthorLabel">Разработчик приложения</v:String>
+    <v:String x:Key="SupportMusicCreatorLabel">Поддержать разработчика Element Music</v:String>
     <v:String x:Key="ElementAuthorLabel">Разработчик сети Element</v:String>
+    <v:String x:Key="SupportElementAuthorLabel">Поддержать разработчика Element</v:String>
+    <v:String x:Key="LegalInfoLabel">Element Music (Windows) не является правообладателем контента, представленного на страницах Главная и Избранное, а лишь предоставляет доступ к материалам, которые уже размещены в Интернете в открытом доступе. Если вы считаете, что ваши авторские права нарушены, напишите на почту elemsupport@proton.me.</v:String>
 
     <v:String x:Key="InfoBarSuccessTitle">Успешно</v:String>
     <v:String x:Key="InfoBarWarningTitle">Внимание</v:String>

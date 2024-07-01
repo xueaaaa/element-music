@@ -7,12 +7,16 @@ namespace ElementMusic.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (parameter.ToString() == "CoverUri")
-                return value == string.Empty ? "Resources/Images/empty_cover.jpg" : $"https://elemsocial.com/Content/Music/Covers/{value}";
-            else if (parameter.ToString() == "SimpleCoverUri")
-                return value == string.Empty ? "Resources/Images/empty_cover.jpg" : $"https://elemsocial.com/Content/Simple/{value}";
+            string emptyCoverPath = "/resources/images/empty_cover.jpg";
 
-            return string.Empty;
+            if (value?.ToString() == emptyCoverPath) return emptyCoverPath;
+
+            if (parameter.ToString() == "CoverUri")
+                return $"https://elemsocial.com/Content/Music/Covers/{value}";
+            else if (parameter.ToString() == "SimpleCoverUri")
+                return $"https://elemsocial.com/Content/Simple/{value}";
+
+            return emptyCoverPath;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

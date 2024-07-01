@@ -1,4 +1,5 @@
 ﻿using ElementMusic.Models.ElementAPI;
+using ElementMusic.ViewModels.Pages;
 using ElementMusic.ViewModels.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
@@ -63,7 +64,8 @@ namespace ElementMusic.ViewModels.Helpers
 
         public SongPlayerViewModel()
         {
-            Volume = (int)(_mediaPlayer.Volume * 100);
+            Volume = Properties.Settings.Default.Volume;
+            VolumeChanged();
 
             _timer.Interval = TimeSpan.FromMilliseconds(1);
             _timer.Tick += Timer_Tick;
@@ -91,7 +93,7 @@ namespace ElementMusic.ViewModels.Helpers
             {
                 Skip(currentSongNode.Next.Value, false);
             }
-            else if (PlayingProgress >= 100 && (_playedSongs == null || currentSongNode.Next?.Value == null)) 
+            else if (PlayingProgress >= 100 && (_playedSongs == null || currentSongNode.Next?.Value == null))
                 Stop();
         }
 
@@ -115,8 +117,16 @@ namespace ElementMusic.ViewModels.Helpers
             _mediaPlayer.Position = TimeSpan.FromSeconds(newProgress);
         }
 
-        public void VolumeChanged() =>
+        public void VolumeChanged(bool save = false)
+        {
             _mediaPlayer.Volume = (double)Volume / 100;
+            App.GetService<SettingsViewModel>().Volume = Volume;
+            if (save)
+            {
+                Properties.Settings.Default.Volume = Volume;
+                Properties.Settings.Default.Save();
+            }
+        }
 
         public void StartFromNew(Song song)
         {

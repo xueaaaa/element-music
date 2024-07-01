@@ -70,13 +70,34 @@
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
+        <!--#region AUTHORIZATION CARD-->
         <ui:Card Grid.Row="2"
                  Visibility="{Binding ViewModel.IsAuthorized, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center">
             <StackPanel>
-                <ui:TextBlock FontTypography="Title"
-                              Text="{DynamicResource LoginCardHeader}"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ui:TextBlock FontTypography="Title"
+                                  Text="{DynamicResource LoginCardHeader}"/>
+                    <ui:SplitButton Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    Icon="{ui:SymbolIcon Globe24}">
+                        <ui:SplitButton.Flyout>
+                            <ContextMenu>
+                                <ui:ListView ItemsSource="{Binding ViewModel.SettingsViewModel.Languages}"
+                                             SelectedItem="{Binding ViewModel.SettingsViewModel.SelectedLanguage}"
+                                             DisplayMemberPath="DisplayName"
+                                             SelectedValuePath="Tag"/>
+                            </ContextMenu>
+                        </ui:SplitButton.Flyout>
+                    </ui:SplitButton>
+                </Grid>
+                
                 <ui:TextBlock Margin="0 12 0 24"
                               FontTypography="Caption"
                               Foreground="{ui:ThemeResource TextFillColorSecondaryBrush}"
@@ -99,6 +120,7 @@
                            Content="{DynamicResource LoginCardHeader}" Cursor=""/>
             </StackPanel>
         </ui:Card>
+        <!--#endregion-->
 
         <!--#region STANDART MUSIC PLAYER -->
         <Grid Grid.Row="1"

@@ -42,6 +42,7 @@
         <Grid>
             <Image Source="{Binding Song.Cover.SimpleImage, ElementName=Grid, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"
                    RenderOptions.BitmapScalingMode="Fant"
+                   d:Source="/resources/images/empty_cover.jpg"
                    Panel.ZIndex="2"
                    Stretch="Fill"
                    Height="140"
