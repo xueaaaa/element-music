@@ -316,9 +316,10 @@
                         <ui:TextBlock FontTypography="Subtitle"
                                       Margin="0 0 0 7"
                                       Text="{DynamicResource AlreadyPlayedLabel}"/>
-                        
+
                         <ui:ListView ItemsSource="{Binding PlayedSongsPublic}"
-                                     SelectedItem="{Binding CurrentSong, Mode=OneWay}">
+                                     SelectedItem="{Binding CurrentSong, Mode=OneWay}"
+                                     MaxHeight="600">
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ui:Button Command="{Binding PlayCommand}"

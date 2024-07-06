@@ -106,7 +106,7 @@ namespace ElementMusic.ViewModels.Helpers
                 ForwardEnabled = true;
             }
             else App.GetService<MainWindowViewModel>().InfoBarViewModel
-                    .ErrorTemplate(Application.Current.Resources["AlreadyInQueue"].ToString());
+                    .ErrorTemplate($"{Application.Current.Resources["AlreadyInQueue"]}: {song.Title}");
         }
 
         public void PlayingProgressChanged()
@@ -188,7 +188,7 @@ namespace ElementMusic.ViewModels.Helpers
         [RelayCommand]
         private void GoBackwardSong()
         {
-            if (_playedSongs.Count > 1)
+            if (_playedSongs.Find(CurrentSong)?.Previous != null)
             {
                 var prev = _playedSongs.Find(CurrentSong)?.Previous?.Value;
                 Skip(prev, false);

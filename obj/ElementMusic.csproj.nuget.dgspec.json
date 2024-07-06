@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\ElementMusic\\ElementMusic.csproj": {}
+    "D:\\Мои программы\\Персональные проекты\\ElementMusic\\ElementMusic.csproj": {}
   },
   "projects": {
-    "D:\\C#\\ElementMusic\\ElementMusic.csproj": {
+    "D:\\Мои программы\\Персональные проекты\\ElementMusic\\ElementMusic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\ElementMusic\\ElementMusic.csproj",
+        "projectUniqueName": "D:\\Мои программы\\Персональные проекты\\ElementMusic\\ElementMusic.csproj",
         "projectName": "ElementMusic",
-        "projectPath": "D:\\C#\\ElementMusic\\ElementMusic.csproj",
-        "packagesPath": "C:\\Users\\GamePC\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\ElementMusic\\obj\\",
+        "projectPath": "D:\\Мои программы\\Персональные проекты\\ElementMusic\\ElementMusic.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\Мои программы\\Персональные проекты\\ElementMusic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\GamePC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -77,7 +76,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
