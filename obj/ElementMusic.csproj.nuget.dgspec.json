@@ -55,6 +55,10 @@
             "WPF-UI": {
               "target": "Package",
               "version": "[3.0.4, )"
+            },
+            "xueaaaa.VersionControl": {
+              "target": "Package",
+              "version": "[1.0.1, )"
             }
           },
           "imports": [

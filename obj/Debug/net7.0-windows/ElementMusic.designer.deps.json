@@ -377,6 +377,14 @@
           }
         }
       },
+      "Octokit/9.1.2": {
+        "runtime": {
+          "lib/netstandard2.0/Octokit.dll": {
+            "assemblyVersion": "9.1.2.0",
+            "fileVersion": "9.1.2.0"
+          }
+        }
+      },
       "System.Diagnostics.DiagnosticSource/8.0.0": {
         "runtime": {
           "lib/net7.0/System.Diagnostics.DiagnosticSource.dll": {
@@ -439,6 +447,17 @@
           "lib/net7.0-windows7.0/Wpf.Ui.dll": {
             "assemblyVersion": "3.0.4.0",
             "fileVersion": "3.0.4.0"
+          }
+        }
+      },
+      "xueaaaa.VersionControl/1.0.1": {
+        "dependencies": {
+          "Octokit": "9.1.2"
+        },
+        "runtime": {
+          "lib/net6.0/VersionControl.dll": {
+            "assemblyVersion": "1.0.1.0",
+            "fileVersion": "1.0.1.0"
           }
         }
       }
@@ -641,6 +660,13 @@
       "path": "microsoft.extensions.primitives/8.0.0",
       "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
     },
+    "Octokit/9.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YKh5EYi+b2mV8eafANJkkZKKBCpI2MNPeSCTlKLYWqVGktOn/TBc7NZEcViPMSNw6R+glgmbkOetLc6LuNK5qQ==",
+      "path": "octokit/9.1.2",
+      "hashPath": "octokit.9.1.2.nupkg.sha512"
+    },
     "System.Diagnostics.DiagnosticSource/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -675,6 +701,13 @@
       "sha512": "sha512-Jbt8nJ4MSC/WBhqx6iXOW06Rt2UUNVxA8+23AOSM63jlOIhU6e6P4BIw8rL/UnRPycOdA2vntYl5i7k53E0AGg==",
       "path": "wpf-ui/3.0.4",
       "hashPath": "wpf-ui.3.0.4.nupkg.sha512"
+    },
+    "xueaaaa.VersionControl/1.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rmm0c4icY4nqAubg7IX5UDFY3E2zerJGvRdZCpBbkeHScmKOZOQeuoiLmPbXQxCl/nP7B0uG1lfMclH2awB5iQ==",
+      "path": "xueaaaa.versioncontrol/1.0.1",
+      "hashPath": "xueaaaa.versioncontrol.1.0.1.nupkg.sha512"
     }
   }
 }

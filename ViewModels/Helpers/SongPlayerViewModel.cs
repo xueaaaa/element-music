@@ -122,10 +122,7 @@ namespace ElementMusic.ViewModels.Helpers
             _mediaPlayer.Volume = (double)Volume / 100;
             App.GetService<SettingsViewModel>().Volume = Volume;
             if (save)
-            {
                 Properties.Settings.Default.Volume = Volume;
-                Properties.Settings.Default.Save();
-            }
         }
 
         public void StartFromNew(Song song)

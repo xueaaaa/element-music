@@ -154,3 +154,5 @@ D:\Мои программы\Персональные проекты\ElementMusi
 D:\Мои программы\Персональные проекты\ElementMusic\obj\Debug\net7.0-windows\ElementMusic.pdb
 D:\Мои программы\Персональные проекты\ElementMusic\obj\Debug\net7.0-windows\ElementMusic.genruntimeconfig.cache
 D:\Мои программы\Персональные проекты\ElementMusic\obj\Debug\net7.0-windows\ref\ElementMusic.dll
+D:\Мои программы\Персональные проекты\ElementMusic\bin\Debug\net7.0-windows\Octokit.dll
+D:\Мои программы\Персональные проекты\ElementMusic\bin\Debug\net7.0-windows\VersionControl.dll

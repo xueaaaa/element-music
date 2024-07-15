@@ -4,6 +4,10 @@ using ElementMusic.ViewModels.Pages;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Text.Json;
+using VersionControl;
+using VersionControl.Models.Installers;
+using VersionControl.Models.Versions;
+using Version = VersionControl.Models.Versions.Version;
 
 namespace ElementMusic.ViewModels.Windows
 {
@@ -17,6 +21,11 @@ namespace ElementMusic.ViewModels.Windows
         private  SettingsViewModel _settingsViewModel;
         [ObservableProperty]
         private bool _isAuthorized;
+
+        [ObservableProperty]
+        private bool _newVersionAvaliable;
+        [ObservableProperty]
+        private GitVersion _newVersion;
 
         [Required]
         private string _email;
@@ -48,6 +57,8 @@ namespace ElementMusic.ViewModels.Windows
 
         public MainWindowViewModel()
         {
+            CheckForUpdates();
+
             if (Properties.Settings.Default.LastAuthorizationDay.AddDays(3) < DateTime.Now)
                 IsAuthorized = false;
             else if(Properties.Settings.Default.SessionKey == string.Empty) 
@@ -70,6 +81,21 @@ namespace ElementMusic.ViewModels.Windows
                     IsAuthorized = Properties.Settings.Default.SessionKey == string.Empty ?
                         false : true;
             };
+        }
+
+        private async void CheckForUpdates()
+        {
+            var local = Version.Local;
+            var gitVersion = await GitVersion.Create();
+            var installer = new VersionInstaller(local, gitVersion);
+
+            if (installer.Check())
+            {
+                NewVersionAvaliable = true;
+                IsAuthorized = false;
+                NewVersion = gitVersion;
+            }
+            else NewVersionAvaliable = false;
         }
 
         [RelayCommand]
@@ -108,5 +134,15 @@ namespace ElementMusic.ViewModels.Windows
                 Properties.Settings.Default.LastAuthorizationDay = DateTime.Now;    
             }
         }
+
+        [RelayCommand]
+        private void Install()
+        {
+
+        }
+
+        [RelayCommand]
+        private void CloseUpdateCard() =>
+            NewVersionAvaliable = false;
     }
 }

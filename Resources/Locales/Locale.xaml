@@ -13,6 +13,12 @@
     <v:String x:Key="SaveFormLabel">Save the data for future authorizations</v:String>
     <v:String x:Key="SaveFormToolTip">If you enable this option, when the session expires, Element Music will automatically create a new one with the saved parameters.</v:String>
 
+    <v:String x:Key="NewVersionCardHeader">New version avaliable</v:String>
+    <v:String x:Key="DescriptionLabel">Update description</v:String>
+    <v:String x:Key="PrereleaseLabel">Prerelease</v:String>
+    <v:String x:Key="InstallButton">Install</v:String>
+    <v:String x:Key="NotNowButton">Not now</v:String>
+    
     <v:String x:Key="ToFavoriteButton">Add to favorite</v:String>
     <v:String x:Key="FromFavoriteButton">Remove from favorite</v:String>
     <v:String x:Key="ToQueueButton">Add to queue...</v:String>

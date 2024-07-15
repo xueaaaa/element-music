@@ -14,6 +14,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
 using Wpf.Ui;
+using VersionControl;
 
 namespace ElementMusic
 {
@@ -89,6 +90,8 @@ namespace ElementMusic
                 lang;
 
             Settings.Default.PropertyChanged += (_, _) => Settings.Default.Save();
+
+            Parameters.Set("element-music", "xueaaaa", "Update.zip");
 
             _host.Start();
         }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "et/ICP9pQQzCIM8+sR6EIpEQwwhkWbnLnCdn4mNcEnWswPip8R3OL9JYGqcBMJ47vhxyYCOOez9yp33cFEV/NA==",
+  "dgSpecHash": "XzGQRubV5sTDszsuj3zGPHHq+nzezZU7X+UOYEWwVVfNbX0x4crymnCgliIhPWr+fJ6re6FRo5hJnHuYyN7g1g==",
   "success": true,
   "projectFilePath": "D:\\Мои программы\\Персональные проекты\\ElementMusic\\ElementMusic.csproj",
   "expectedPackageFiles": [
@@ -32,11 +32,13 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.options\\8.0.0\\microsoft.extensions.options.8.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.options.configurationextensions\\8.0.0\\microsoft.extensions.options.configurationextensions.8.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\octokit\\9.1.2\\octokit.9.1.2.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.0\\system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.diagnostics.eventlog\\8.0.0\\system.diagnostics.eventlog.8.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\wpf-ui\\3.0.4\\wpf-ui.3.0.4.nupkg.sha512"
+    "C:\\Users\\User\\.nuget\\packages\\wpf-ui\\3.0.4\\wpf-ui.3.0.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\xueaaaa.versioncontrol\\1.0.1\\xueaaaa.versioncontrol.1.0.1.nupkg.sha512"
   ],
   "logs": []
 }

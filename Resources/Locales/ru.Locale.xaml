@@ -13,6 +13,12 @@
     <v:String x:Key="SaveFormLabel">Сохранить данные для последующих авторизаций</v:String>
     <v:String x:Key="SaveFormToolTip">При включении данного параметра по истечению срока действия сессии Element Music автоматически создаст новую с сохранёнными параметрами.</v:String>
 
+    <v:String x:Key="NewVersionCardHeader">Доступна новая версия</v:String>
+    <v:String x:Key="DescriptionLabel">Описание обновления</v:String>
+    <v:String x:Key="PrereleaseLabel">Предварительный выпуск</v:String>
+    <v:String x:Key="InstallButton">Установить</v:String>
+    <v:String x:Key="NotNowButton">Не сейчас</v:String>
+    
     <v:String x:Key="ToFavoriteButton">В избранное</v:String>
     <v:String x:Key="FromFavoriteButton">Из избранного</v:String>
     <v:String x:Key="ToQueueButton">В очередь...</v:String>
