@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Windows.Threading;
 using Wpf.Ui;
 using VersionControl;
+using Yandex.Metrica;
 
 namespace ElementMusic
 {
@@ -92,6 +93,8 @@ namespace ElementMusic
             Settings.Default.PropertyChanged += (_, _) => Settings.Default.Save();
 
             Parameters.Set("element-music", "xueaaaa", "Update.zip", $"{Directory.GetCurrentDirectory()}\\Update.zip");
+            YandexMetricaFolder.SetCurrent("AppMetrica");
+            YandexMetrica.Activate("805bdafa-36f3-4a9c-94c2-e914014f7ac9");
 
             _host.Start();
         }
