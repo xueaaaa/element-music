@@ -115,6 +115,15 @@ namespace ElementMusic.ViewModels.Helpers
                     .ErrorTemplate($"{Application.Current.Resources["AlreadyInQueue"]}: {song.Title}");
         }
 
+        [RelayCommand]
+        public void ClearQueue()
+        {
+            _playedSongs.Clear();
+            if (CurrentSong != null)
+                _playedSongs.AddLast(CurrentSong);
+            OnPropertyChanged(nameof(PlayedSongsPublic));
+        }
+
         public void PlayingProgressChanged()
         {
             if (_ignoreChange) return;

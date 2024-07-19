@@ -23,6 +23,7 @@
     <v:String x:Key="FromFavoriteButton">Из избранного</v:String>
     <v:String x:Key="ToQueueButton">В очередь...</v:String>
     <v:String x:Key="AlreadyPlayedLabel">Уже играло</v:String>
+    <v:String x:Key="ClearPlayedSongsButton">Очистить</v:String>
     <v:String x:Key="SongInfoHeader">Подробная информация</v:String>
     <v:String x:Key="SongTitleLabel">Название</v:String>
     <v:String x:Key="SongArtistLabel">Исполнитель</v:String>

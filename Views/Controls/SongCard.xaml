@@ -74,7 +74,7 @@
                           Text="{Binding Song.Title, ElementName=Grid}"/>
             <ui:TextBlock Appearance="Secondary"
                           TextTrimming="CharacterEllipsis"
-                          ToolTip="{Binding Song.Title, ElementName=Grid}"
+                          ToolTip="{Binding Song.Artist, ElementName=Grid}"
                           Text="{Binding Song.Artist, ElementName=Grid}"/>
         </StackPanel>
 

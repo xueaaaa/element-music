@@ -23,6 +23,7 @@
     <v:String x:Key="FromFavoriteButton">Remove from favorite</v:String>
     <v:String x:Key="ToQueueButton">Add to queue...</v:String>
     <v:String x:Key="AlreadyPlayedLabel">Already played</v:String>
+    <v:String x:Key="ClearPlayedSongsButton">Clear</v:String>
     <v:String x:Key="SongInfoHeader">More Info</v:String>
     <v:String x:Key="SongTitleLabel">Song title</v:String>
     <v:String x:Key="SongArtistLabel">Artist</v:String>
