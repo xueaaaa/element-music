@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows10.0.17763.0</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Resources\Icons\favicon.ico</ApplicationIcon>
     <UseWPF>true</UseWPF>
@@ -11,6 +11,11 @@
     <Authors>xueaaaa</Authors>
     <Company>xueaaaa</Company>
     <LangVersion>preview</LangVersion>
+    <Version>1.0.0.0</Version>
+    <RootNamespace>ElementMusic</RootNamespace>
+    <AssemblyName>ElementMusic</AssemblyName>
+    <PackageId>ElementMusic</PackageId>
+    <Product>ElementMusic</Product>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +31,13 @@
     <PackageReference Include="WPF-UI" Version="3.0.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2 " />
-    <PackageReference Include="xueaaaa.VersionControl" Version="1.0.1" />
+    <PackageReference Include="xueaaaa.VersionControl" Version="1.0.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="VersionControl">
+      <HintPath>..\VersionControl\bin\Release\net6.0\VersionControl.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

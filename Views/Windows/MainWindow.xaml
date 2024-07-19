@@ -27,8 +27,9 @@
         <h:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <h:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
         <h:UriConverter x:Key="UriConverter"/>
+        <h:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </ui:FluentWindow.Resources>
-    <Grid>
+    <Grid IsEnabled="{Binding IsDownloading, Converter={StaticResource InverseBooleanConverter}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -124,6 +125,7 @@
         
         <!--#region UPDATE CARD-->
         <ui:Card Grid.Row="2"
+                 Panel.ZIndex="100"
                  Visibility="{Binding ViewModel.NewVersionAvaliable, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=ui:FluentWindow}}"
                  DataContext="{Binding ViewModel.NewVersion}"
                  MaxWidth="500"
@@ -162,17 +164,25 @@
                               TextWrapping="Wrap"
                               Text="{Binding Description}"/>
 
-                <Grid Margin="0 7 0 0">
+                <ProgressBar Margin="0 7 0 0"
+                             DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel}"
+                             Visibility="{Binding IsDownloading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             Value="{Binding DownloadPercent}"/>
+
+                <Grid Margin="0 7 0 0"
+                      DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
 
                     <ui:Button Appearance="Primary"
-                               Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel.InstallCommand}"
+                               IsEnabled="{Binding IsDownloading, Converter={StaticResource InverseBooleanConverter}}"
+                               Command="{Binding InstallCommand}"
                                Content="{DynamicResource InstallButton}"/>
                     <ui:Button Grid.Column="1"
-                               Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel.CloseUpdateCardCommand}"
+                               Command="{Binding CloseUpdateCardCommand}"
+                               IsEnabled="{Binding IsDownloading, Converter={StaticResource InverseBooleanConverter}}"
                                HorizontalAlignment="Right"
                                Appearance="Secondary"
                                Content="{DynamicResource NotNowButton}"/>

@@ -73,5 +73,6 @@
 
     <v:String x:Key="IncorrectEmailError">Incorrect email address</v:String>
     <v:String x:Key="AlreadyInQueue">This song is already in the queue or has been played before</v:String>
+    <v:String x:Key="MissedUpdater">The update installer could not be found. Install the update manually.</v:String>
     <v:String x:Key="FutureUpdates">This feature will be available in future updates</v:String>
 </ResourceDictionary>

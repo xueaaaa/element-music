@@ -91,7 +91,7 @@ namespace ElementMusic
 
             Settings.Default.PropertyChanged += (_, _) => Settings.Default.Save();
 
-            Parameters.Set("element-music", "xueaaaa", "Update.zip");
+            Parameters.Set("element-music", "xueaaaa", "Update.zip", $"{Directory.GetCurrentDirectory()}\\Update.zip");
 
             _host.Start();
         }

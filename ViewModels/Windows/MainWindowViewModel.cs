@@ -1,12 +1,16 @@
 ﻿using ElementMusic.Models.ElementAPI;
 using ElementMusic.ViewModels.Helpers;
 using ElementMusic.ViewModels.Pages;
+using Octokit;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Text.Json;
 using VersionControl;
 using VersionControl.Models.Installers;
 using VersionControl.Models.Versions;
+using Application = System.Windows.Application;
 using Version = VersionControl.Models.Versions.Version;
 
 namespace ElementMusic.ViewModels.Windows
@@ -26,6 +30,12 @@ namespace ElementMusic.ViewModels.Windows
         private bool _newVersionAvaliable;
         [ObservableProperty]
         private GitVersion _newVersion;
+        [ObservableProperty]
+        private bool _isDownloading;
+        [ObservableProperty]
+        private int _downloadPercent;
+
+        private VersionInstaller _installer;
 
         [Required]
         private string _email;
@@ -61,7 +71,7 @@ namespace ElementMusic.ViewModels.Windows
 
             if (Properties.Settings.Default.LastAuthorizationDay.AddDays(3) < DateTime.Now)
                 IsAuthorized = false;
-            else if(Properties.Settings.Default.SessionKey == string.Empty) 
+            else if (Properties.Settings.Default.SessionKey == string.Empty)
                 IsAuthorized = false;
             else IsAuthorized = true;
 
@@ -87,12 +97,11 @@ namespace ElementMusic.ViewModels.Windows
         {
             var local = Version.Local;
             var gitVersion = await GitVersion.Create();
-            var installer = new VersionInstaller(local, gitVersion);
+            _installer = new VersionInstaller(local, gitVersion);
 
-            if (installer.Check())
+            if (_installer.Check())
             {
                 NewVersionAvaliable = true;
-                IsAuthorized = false;
                 NewVersion = gitVersion;
             }
             else NewVersionAvaliable = false;
@@ -138,7 +147,27 @@ namespace ElementMusic.ViewModels.Windows
         [RelayCommand]
         private void Install()
         {
+            IsDownloading = true;
+            _installer.Install();
 
+            _installer.WebClient.DownloadProgressChanged += (_, e) =>
+                DownloadPercent = e.ProgressPercentage;
+            _installer.WebClient.DownloadFileCompleted += (_, _) =>
+            {
+                IsDownloading = false;
+
+                string updaterPath = $"{Directory.GetCurrentDirectory()}\\Updater.exe";
+                if (File.Exists(updaterPath))
+                {
+                    Process.Start(updaterPath, new List<string>
+                    {
+                    Parameters.UpdateFilePath,
+                    Application.ResourceAssembly.GetName().Name ?? string.Empty
+                    });
+                    Application.Current.Shutdown();
+                }
+                else InfoBarViewModel.ErrorTemplate(Application.Current.Resources["MissedUpdater"].ToString());
+            };
         }
 
         [RelayCommand]

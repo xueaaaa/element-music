@@ -73,5 +73,6 @@
 
     <v:String x:Key="IncorrectEmailError">Некорректный адрес электронной почты</v:String>
     <v:String x:Key="AlreadyInQueue">Эта песня уже находится в очереди или играла раньше</v:String>
+    <v:String x:Key="MissedUpdater">Не удалось найти программу установки обновлений. Установите обновление вручную.</v:String>
     <v:String x:Key="FutureUpdates">Эта функция будет доступна в будущих обновлениях</v:String>
 </ResourceDictionary>
