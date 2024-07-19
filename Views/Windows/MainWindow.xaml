@@ -29,7 +29,7 @@
         <h:UriConverter x:Key="UriConverter"/>
         <h:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </ui:FluentWindow.Resources>
-    <Grid IsEnabled="{Binding IsDownloading, Converter={StaticResource InverseBooleanConverter}}">
+    <Grid IsEnabled="{Binding ViewModel.IsDownloading, Converter={StaticResource InverseBooleanConverter}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -261,9 +261,27 @@
                               HorizontalAlignment="Left"
                               RenderOptions.BitmapScalingMode="Fant"
                               Height="70" Width="70"
-                              Margin="0 -7"
+                              Margin="0 -7.1"
                               Stretch="Fill"
                               Source="{Binding CurrentSong.Cover.SimpleImage, Converter={StaticResource UriConverter}, ConverterParameter=SimpleCoverUri}"/>
+
+                    <ToggleButton Grid.Column="1"
+                                  Margin="0"
+                                  BorderThickness="0"
+                                  IsChecked="{Binding RepeatSongs}"
+                                  Background="Transparent">
+                        <ToggleButton.Content>
+                            <Grid>
+                                <ui:SymbolIcon Symbol="ArrowRepeatAll24"
+                                               Visibility="{Binding RepeatSongs, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                                               FontSize="18"/>
+                                <ui:SymbolIcon Symbol="ArrowRepeatAll24"
+                                               Visibility="{Binding RepeatSongs, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                               Foreground="{ui:ThemeResource AccentTextFillColorTertiaryBrush}"
+                                               FontSize="18"/>
+                            </Grid>
+                        </ToggleButton.Content>
+                    </ToggleButton>
 
                     <ui:TextBlock Grid.Column="1"
                                   Grid.Row="1"

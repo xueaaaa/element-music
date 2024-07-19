@@ -51,6 +51,8 @@ namespace ElementMusic.ViewModels.Helpers
         private bool _backwardEnabled;
         [ObservableProperty]
         private bool _forwardEnabled;
+        [ObservableProperty]
+        private bool _repeatSongs;
 
         [ObservableProperty]
         private FlyoutViewModel _volumeFlyoutViewModel =
@@ -94,7 +96,11 @@ namespace ElementMusic.ViewModels.Helpers
                 Skip(currentSongNode.Next.Value, false);
             }
             else if (PlayingProgress >= 100 && (_playedSongs == null || currentSongNode.Next?.Value == null))
-                Stop();
+            {
+                if (RepeatSongs)
+                    Skip(_playedSongs.First.Value, false);
+                else Stop();
+            }
         }
 
         public void AddToQueue(Song song)
