@@ -36,6 +36,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
         <ui:NavigationView x:Name="RootNavigation"
                            Grid.Row="2"
                            Visibility="{Binding ViewModel.IsAuthorized, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -71,6 +76,20 @@
                 </Grid>
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
+
+        <ContentPresenter x:Name="RootContentDialog"
+                  Grid.Row="0"
+                  Grid.RowSpan="2" />
+
+        <ui:TitleBar x:Name="TitleBar"
+                     Title="Element Music"
+                     Grid.Row="0"
+                     Grid.ColumnSpan="2"
+                     CloseWindowByDoubleClickOnIcon="True">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Resources/Icons/favicon.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
 
         <!--#region AUTHORIZATION CARD-->
         <ui:Card Grid.Row="2"
@@ -448,6 +467,17 @@
             </StackPanel>
         </Grid>
         <!--#endregion-->
+        
+        <!--#region LYRICS DISPLAY-->
+        <Border Grid.Column="1"
+                Grid.Row="2"
+                Width="350"
+                Background="{ui:ThemeResource AccentTextFillColorSecondaryBrush}">
+            <ItemsControl>
+                
+            </ItemsControl>
+        </Border>
+        <!--#endregion-->
 
         <ui:InfoBar Grid.Row="3"
                     DataContext="{Binding ViewModel.InfoBarViewModel}"
@@ -455,18 +485,5 @@
                     Message="{Binding Message}"
                     IsOpen="{Binding IsOpen, Mode=TwoWay}"
                     Severity="{Binding Severity}"/>
-
-        <ContentPresenter x:Name="RootContentDialog"
-                          Grid.Row="0"
-                          Grid.RowSpan="2" />
-
-        <ui:TitleBar x:Name="TitleBar"
-                     Title="Element Music"
-                     Grid.Row="0"
-                     CloseWindowByDoubleClickOnIcon="True">
-            <ui:TitleBar.Icon>
-                <ui:ImageIcon Source="pack://application:,,,/Resources/Icons/favicon.png" />
-            </ui:TitleBar.Icon>
-        </ui:TitleBar>
     </Grid>
 </ui:FluentWindow>

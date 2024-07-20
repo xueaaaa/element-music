@@ -3,34 +3,25 @@ using System.Net.Http;
 
 namespace ElementMusic.Models.ElementAPI
 {
-    internal class APISender
+    internal class ElementAPISender : BaseAPISender
     {
-        private Uri _baseUrl = new Uri("https://elemsocial.com/System/API/");
-        private HttpClient _httpClient = new HttpClient();
-
-        public APISender()
+        public ElementAPISender() : base(new Uri("https://elemsocial.com/System/API/"))
         {
-            _httpClient.BaseAddress = _baseUrl;
-            _httpClient.DefaultRequestHeaders.Add("User-Agent", "ElementAPI");
+            AddRequestHeader("User-Agent", "ElementAPI");
             _httpClient.DefaultRequestHeaders.ExpectContinue = false;
 
             if (Properties.Settings.Default.SessionKey != null)
-                _httpClient.DefaultRequestHeaders.Add("S-KEY", Properties.Settings.Default.SessionKey);
+                AddRequestHeader("S-KEY", Properties.Settings.Default.SessionKey);
 
             Properties.Settings.Default.PropertyChanged += (o, e) =>
             {
                 if (e.PropertyName == nameof(Properties.Settings.Default.SessionKey)
                 && Properties.Settings.Default.SessionKey != null)
-                    _httpClient.DefaultRequestHeaders.Add("S-KEY", Properties.Settings.Default.SessionKey);
+                    AddRequestHeader("S-KEY", Properties.Settings.Default.SessionKey);
             };
         }
 
-        ~APISender()
-        {
-            _httpClient.Dispose();
-        }
-
-        public async Task<HttpResponseMessage?> SendRequest(string endpoint, HttpMethod method, Dictionary<string, object> parameters = null)
+        public override async Task<HttpResponseMessage?> SendRequest(string endpoint, HttpMethod method, Dictionary<string, object> parameters = null)
         {
             using (var formData = new MultipartFormDataContent())
             {
@@ -63,14 +54,5 @@ namespace ElementMusic.Models.ElementAPI
                 }
             }
         }
-
-        public void AddRequestHeader(string key, string value)
-        {
-            if (_httpClient.DefaultRequestHeaders.Contains(key))
-                RemoveRequestHeader(key);
-            _httpClient.DefaultRequestHeaders.Add(key, value);
-        }
-
-        public void RemoveRequestHeader(string key) => _httpClient.DefaultRequestHeaders.Remove(key);
     }
 }

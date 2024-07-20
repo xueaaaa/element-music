@@ -39,7 +39,7 @@ namespace ElementMusic.ViewModels.Pages
                 return;
             }
 
-            var resp = await App.APISender.SendRequest("Search.php", HttpMethod.Post, new Dictionary<string, object>
+            var resp = await App.ElementAPISender.SendRequest("Search.php", HttpMethod.Post, new Dictionary<string, object>
             {
                 { "SearchVal", SearchText.Trim() },
                 { "Category", "Music" }
@@ -52,7 +52,7 @@ namespace ElementMusic.ViewModels.Pages
                 var songs = new ObservableCollection<Song>();   
                 foreach (var item in parsed.Content)
                 {
-                    var songRaw = await App.APISender.SendRequest("LoadSong.php", HttpMethod.Post, new Dictionary<string, object>
+                    var songRaw = await App.ElementAPISender.SendRequest("LoadSong.php", HttpMethod.Post, new Dictionary<string, object>
                     {
                         { "SongID", item.ID }
                     });

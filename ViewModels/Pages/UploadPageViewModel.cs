@@ -52,7 +52,7 @@ namespace ElementMusic.ViewModels.Pages
         [RelayCommand]
         private async void Send()
         {
-            var resp = await App.APISender.SendRequest("AddMusic.php", HttpMethod.Post, new Dictionary<string, object>
+            var resp = await App.ElementAPISender.SendRequest("AddMusic.php", HttpMethod.Post, new Dictionary<string, object>
             {
                 { "Title", Input.Title },
                 { "Artist", Input.Artist },

@@ -1,7 +1,6 @@
 ﻿using ElementMusic.Models.ElementAPI;
 using ElementMusic.ViewModels.Helpers;
 using ElementMusic.ViewModels.Pages;
-using Octokit;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
@@ -76,10 +75,6 @@ namespace ElementMusic.ViewModels.Windows
             else IsAuthorized = true;
 
             Email = Properties.Settings.Default.Email;
-            Password = Properties.Settings.Default.Password;
-
-            if (!IsAuthorized && Properties.Settings.Default.Email != string.Empty)
-                Login(null);
 
             SaveData = true;
 
@@ -125,7 +120,7 @@ namespace ElementMusic.ViewModels.Windows
                 return;
             }
 
-            HttpResponseMessage? msg = await App.APISender.SendRequest("Authorization.php?F=LOGIN", HttpMethod.Post, new Dictionary<string, object>
+            HttpResponseMessage? msg = await App.ElementAPISender.SendRequest("Authorization.php?F=LOGIN", HttpMethod.Post, new Dictionary<string, object>
             {
                 { "Email", Email.Trim() },
                 { "Password", Password.Trim() }
@@ -139,7 +134,6 @@ namespace ElementMusic.ViewModels.Windows
             {
                 Properties.Settings.Default.SessionKey = resp.Content;
                 Properties.Settings.Default.Email = SaveData ? Email : string.Empty;
-                Properties.Settings.Default.Password = SaveData ? Password : string.Empty;
                 Properties.Settings.Default.LastAuthorizationDay = DateTime.Now;    
             }
         }

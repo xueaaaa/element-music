@@ -44,7 +44,7 @@ namespace ElementMusic.Models.ElementAPI
         [RelayCommand]
         private async void SetLike()
         {
-            await App.APISender.SendRequest("MusicInteraction.php?F=LIKE", HttpMethod.Post, new Dictionary<string, object>
+            await App.ElementAPISender.SendRequest("MusicInteraction.php?F=LIKE", HttpMethod.Post, new Dictionary<string, object>
             {
                 { "SongID", ID}
             });

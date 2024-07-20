@@ -1,7 +1,9 @@
 ﻿using ElementMusic.Models.ElementAPI;
+using ElementMusic.Models.MusixmatchAPI;
 using ElementMusic.ViewModels.Pages;
 using ElementMusic.ViewModels.Windows;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Windows.Media;
 using System.Windows.Threading;
 using MessageBox = Wpf.Ui.Controls.MessageBox;
@@ -34,6 +36,10 @@ namespace ElementMusic.ViewModels.Helpers
         {
             get => new(_playedSongs.Reverse());
         }
+
+        [ObservableProperty]
+        private LyricsDisplayViewModel _lyricsDisplayViewModel
+            = new();
 
         [ObservableProperty]
         private bool _songLoaded;
@@ -78,6 +84,22 @@ namespace ElementMusic.ViewModels.Helpers
             };
         }
 
+        private async void LoadLyrics()
+        {
+            var resp = await App.MusixmatchAPISender.SendRequest("getLyricsMusix.php", HttpMethod.Get, new Dictionary<string, object>
+            {
+                { "t", CurrentSong.Title },
+                { "a", CurrentSong.Artist },
+                { "d", CurrentSong.Duration },
+                { "type", "alternative" }
+            });
+            var content = await resp.Content.ReadAsStringAsync();
+
+            if (content != null && !content.Contains("error"))
+                LyricsDisplayViewModel.Lyrics = LyricsParser.Parse(content.Split('\n'));
+            else LyricsDisplayViewModel.Lyrics = new List<Lyrics>();
+        }
+
         private void Timer_Tick(object? sender, EventArgs e)
         {
             _ignoreChange = true;
@@ -113,15 +135,6 @@ namespace ElementMusic.ViewModels.Helpers
             }
             else App.GetService<MainWindowViewModel>().InfoBarViewModel
                     .ErrorTemplate($"{Application.Current.Resources["AlreadyInQueue"]}: {song.Title}");
-        }
-
-        [RelayCommand]
-        public void ClearQueue()
-        {
-            _playedSongs.Clear();
-            if (CurrentSong != null)
-                _playedSongs.AddLast(CurrentSong);
-            OnPropertyChanged(nameof(PlayedSongsPublic));
         }
 
         public void PlayingProgressChanged()
@@ -168,12 +181,22 @@ namespace ElementMusic.ViewModels.Helpers
         }
 
         [RelayCommand]
+        private void ClearQueue()
+        {
+            _playedSongs.Clear();
+            if (CurrentSong != null)
+                _playedSongs.AddLast(CurrentSong);
+            OnPropertyChanged(nameof(PlayedSongsPublic));
+        }
+
+        [RelayCommand]
         private void Play(object startTimer)
         {
             if (!_paused)
                 _mediaPlayer.Open(new Uri($"https://elemsocial.com/Content/Music/Files/{CurrentSong.File}"));
             _mediaPlayer.Play();
             if (Convert.ToBoolean(startTimer)) _timer.Start();
+            LoadLyrics();
             Playing = true;
         }
 

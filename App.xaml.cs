@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using Wpf.Ui;
 using VersionControl;
 using Yandex.Metrica;
+using ElementMusic.Models.MusixmatchAPI;
 
 namespace ElementMusic
 {
@@ -57,8 +58,10 @@ namespace ElementMusic
                 services.AddSingleton<SettingsViewModel>();
             }).Build();
 
-        internal static readonly APISender APISender 
-            = new APISender();
+        internal static readonly ElementAPISender ElementAPISender 
+            = new();
+        internal static readonly MusixmatchAPISender MusixmatchAPISender 
+            = new();
 
         /// <summary>
         /// Gets registered service.
@@ -112,6 +115,6 @@ namespace ElementMusic
         /// <summary>
         /// Occurs when an exception is thrown by an application but not handled.
         /// </summary>
-        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) { }
+        private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) => e.Handled = true;
     }
 }

@@ -67,7 +67,7 @@ namespace ElementMusic.Views.Controls
                     break;
             }
 
-            HttpResponseMessage? obj = await App.APISender.SendRequest($"LoadSongs.php?F={f}", HttpMethod.Post, new Dictionary<string, object>()
+            HttpResponseMessage? obj = await App.ElementAPISender.SendRequest($"LoadSongs.php?F={f}", HttpMethod.Post, new Dictionary<string, object>()
             {
                 { "StartIndex", startsFromLast ? Source.Count : 0 }
             });
