@@ -40,7 +40,7 @@
     <v:String x:Key="AllToQueueToolTip">Add all songs from this list to the queue</v:String>
     <v:String x:Key="ReloadToolTip">Reload</v:String>
     <v:String x:Key="LoadMoreToolTip">Load more</v:String>
-    <v:String x:Key="LyricsNotAvaliableLabel">Lyrics is not avaliable right now.</v:String>
+    <v:String x:Key="LyricsNotAvaliableLabel">Lyrics are not avaliable right now.</v:String>
 
     <v:String x:Key="TitleToolTip">Title*</v:String>
     <v:String x:Key="AlbumToolTip">Album</v:String>
