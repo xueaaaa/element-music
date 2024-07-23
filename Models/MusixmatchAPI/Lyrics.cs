@@ -1,8 +1,17 @@
-﻿namespace ElementMusic.Models.MusixmatchAPI
+﻿using ElementMusic.ViewModels.Windows;
+
+namespace ElementMusic.Models.MusixmatchAPI
 {
-    public class Lyrics
+    public partial class Lyrics : ObservableObject
     {
-        public TimeOnly TimeMark { get; set; }
+        public TimeSpan TimeMark { get; set; }
         public string Content { get; set; }
+
+        [ObservableProperty]
+        private bool _isCurrent;
+
+        [RelayCommand]
+        private void MoveToTime() =>
+            App.GetService<MainWindowViewModel>().SongPlayerViewModel.MoveToTime(TimeMark);
     }
 }

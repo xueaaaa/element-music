@@ -40,6 +40,7 @@
     <v:String x:Key="AllToQueueToolTip">Добавить все песни из этого списка в очередь</v:String>
     <v:String x:Key="ReloadToolTip">Перезагрузить</v:String>
     <v:String x:Key="LoadMoreToolTip">Загрузить ещё</v:String>
+    <v:String x:Key="LyricsNotAvaliableLabel">В данный момент текст недоступен.</v:String>
 
     <v:String x:Key="TitleToolTip">Название*</v:String>
     <v:String x:Key="AlbumToolTip">Альбом</v:String>

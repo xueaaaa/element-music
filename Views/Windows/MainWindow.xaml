@@ -8,7 +8,7 @@
                  xmlns:h="clr-namespace:ElementMusic.Helpers"
                  xmlns:pages="clr-namespace:ElementMusic.Views.Pages"
                  Title="Element Music"
-                 MinWidth="970"
+                 MinWidth="1100"
                  Width="1100"
                  Height="650"
                  d:DataContext="{d:DesignInstance local:MainWindow,
@@ -213,6 +213,7 @@
 
         <!--#region STANDART MUSIC PLAYER -->
         <Grid Grid.Row="1"
+              Grid.ColumnSpan="2"
               Margin="100 0 100 7"
               Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel.SongPlayerViewModel.SongLoaded, Converter={StaticResource BooleanToVisibilityConverter}}"
               DataContext="{Binding ViewModel.SongPlayerViewModel}">
@@ -377,7 +378,13 @@
                         Orientation="Horizontal"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
+                <ui:Button Command="{Binding OpenLyricsCommand}"
+                           FontSize="18"
+                           Icon="{ui:SymbolIcon TextField24}"
+                           Appearance="Transparent"
+                           BorderThickness="0"/>
                 <ui:Button Command="{Binding ShowInfoCommand}"
+                           Margin="3 0 0 0"
                            FontSize="18"
                            Icon="{ui:SymbolIcon Info24}"
                            Appearance="Transparent"
@@ -430,9 +437,9 @@
                             <ui:ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ui:Button Command="{Binding PlayCommand}"
-                                                   Appearance="Transparent"
-                                                   BorderThickness="0"
-                                                   Padding="0">
+                                               Appearance="Transparent"
+                                               BorderThickness="0"
+                                               Padding="0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
@@ -471,11 +478,68 @@
         <!--#region LYRICS DISPLAY-->
         <Border Grid.Column="1"
                 Grid.Row="2"
-                Width="350"
-                Background="{ui:ThemeResource AccentTextFillColorSecondaryBrush}">
-            <ItemsControl>
-                
-            </ItemsControl>
+                Width="400"
+                DataContext="{Binding ViewModel.SongPlayerViewModel.LyricsDisplayViewModel}"
+                Visibility="{Binding Visibility}">
+            <ScrollViewer x:Name="LyricsScroller">
+                <StackPanel>
+                    <ProgressBar Value="{Binding RemainToStart}"
+                                 Visibility="{Binding RemainToStartBarVisibility}"
+                                 Height="4"
+                                 Minimum="0"
+                                 Maximum="100"/>
+                    <ItemsControl ItemsSource="{Binding Lyrics}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ui:Button Command="{Binding MoveToTimeCommand}"
+                                           HorizontalAlignment="Stretch"
+                                           Appearance="Transparent"
+                                           CornerRadius="0"
+                                           BorderThickness="0"
+                                           Padding="20 10">
+                                    <ui:Button.Content>
+                                        <Grid HorizontalAlignment="Center"
+                                              VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Content}"
+                                                   Visibility="{Binding IsCurrent, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                   TextWrapping="Wrap"
+                                                   TextAlignment="Center"
+                                                   FontSize="22"
+                                                   FontWeight="Bold"/>
+                                            <TextBlock Text="{Binding Content}"
+                                                   Visibility="{Binding IsCurrent, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                                                   TextAlignment="Center"
+                                                   Opacity="0.4"
+                                                   Foreground="{ui:ThemeResource TextFillColorTertiaryBrush}"
+                                                   TextWrapping="Wrap"
+                                                   FontSize="22"
+                                                   FontWeight="Bold"/>
+                                        </Grid>
+                                    </ui:Button.Content>
+                                </ui:Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ui:TextBlock Margin="0 10"
+                                  Visibility="{Binding NoLyrics, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  FontTypography="Subtitle"
+                                  Text="{DynamicResource LyricsNotAvaliableLabel}"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                    <Separator Margin="0 7 0 0"/>
+                    <ui:TextBlock Margin="0 10"
+                                  Appearance="Tertiary"
+                                  FontTypography="Caption"
+                                  Text="Provided by Musixmatch"
+                                  HorizontalAlignment="Center"/>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
         <!--#endregion-->
 

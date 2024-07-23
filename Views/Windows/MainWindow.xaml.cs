@@ -20,6 +20,8 @@ namespace ElementMusic.Views.Windows
             SetPageService(pageService);
 
             navigationService.SetNavigationControl(RootNavigation);
+
+            Loaded += (_, _) => ViewModel.SongPlayerViewModel.LyricsDisplayViewModel.LyricsScroller = LyricsScroller;
         }
 
         #region INavigationWindow methods

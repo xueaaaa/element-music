@@ -107,6 +107,7 @@ namespace ElementMusic.ViewModels.Helpers
             _ignoreChange = false;
             PlayedLabel = $"{_mediaPlayer.Position:mm\\:ss}";
             DurationLabel = $"-{_mediaPlayer.NaturalDuration.TimeSpan - _mediaPlayer.Position:mm\\:ss}";
+            LyricsDisplayViewModel.CurrentPos = _mediaPlayer.Position;
 
             var currentSongNode = _playedSongs.Find(CurrentSong);
 
@@ -124,6 +125,9 @@ namespace ElementMusic.ViewModels.Helpers
                 else Stop();
             }
         }
+
+        public void MoveToTime(TimeSpan timeSpan) =>
+            _mediaPlayer.Position = timeSpan;
 
         public void AddToQueue(Song song)
         {
@@ -241,6 +245,10 @@ namespace ElementMusic.ViewModels.Helpers
             }
             else BackwardEnabled = false;
         }
+
+        [RelayCommand]
+        private void OpenLyrics() => 
+            LyricsDisplayViewModel.Visibility = LyricsDisplayViewModel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
 
         [RelayCommand]
         private async void ShowInfo()

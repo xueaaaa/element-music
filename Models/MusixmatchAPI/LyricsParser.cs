@@ -15,7 +15,7 @@
 
                 Lyrics lyrics = new()
                 {
-                    TimeMark = new TimeOnly(0, Convert.ToInt32(timeMark[0]), Convert.ToInt32(timeMark[1]), Convert.ToInt32(timeMark[2])),
+                    TimeMark = new TimeSpan(0, 0, Convert.ToInt32(timeMark[0]), Convert.ToInt32(timeMark[1]), Convert.ToInt32(timeMark[2])),
                     Content = parts[2]
                 };
 
