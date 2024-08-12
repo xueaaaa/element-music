@@ -42,7 +42,7 @@
             </Grid>
             
             <c:SongCarousel SongType="None"
-                            Source="{Binding ViewModel.SearchedSongs}"
+                            Source="{Binding ViewModel.SearchedSongs, Mode=OneWay}"
                             Visibility="{Binding ViewModel.SearchedCarouselVisibility}"/>
             <ui:TextBlock Margin="0 36 0 12"
                           FontTypography="Title"

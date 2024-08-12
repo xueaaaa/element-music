@@ -264,7 +264,8 @@
             <ui:Card Grid.Column="1"
                      Padding="0"
                      MinWidth="450"
-                     HorizontalAlignment="Center">
+                     HorizontalAlignment="Center"
+                     IsEnabled="{Binding Enabled}">
                 <Grid MinWidth="450">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>

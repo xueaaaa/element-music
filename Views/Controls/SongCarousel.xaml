@@ -5,9 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       xmlns:local="clr-namespace:ElementMusic.Views.Controls"
+      xmlns:h="clr-namespace:ElementMusic.Helpers"
       Name="Grid"
       mc:Ignorable="d">
-    <Grid>
+    <Grid.Resources>
+        <h:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <h:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+        <h:ListCountToVisibilityConverter x:Key="ListCountToVisibilityConverter"/>
+    </Grid.Resources>
+    <ProgressBar IsIndeterminate="True"
+                 Visibility="{Binding ElementName=Grid, Path=IsSourceLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+    <Grid Visibility="{Binding ElementName=Grid, Path=IsSourceLoading, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
         <ItemsControl Grid.Column="1"
                       x:Name="SongsControl"
                       Margin="7 0"
@@ -15,52 +23,60 @@
             <ItemsControl.Template>
                 <ControlTemplate>
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <ui:Button Margin="0 0 7 0"
-                                   Icon="{ui:SymbolIcon ArrowLeft24}"
-                                   Click="ScrollLeftButtonClick"
-                                   Appearance="Transparent"/>
+                        <ui:TextBlock VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Visibility="{Binding ItemsSource.Count, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ListCountToVisibilityConverter}}"
+                                      Appearance="Secondary"
+                                      FontTypography="BodyStrong"
+                                      Text="{DynamicResource SongsNotFoundLabel}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <ScrollViewer Grid.Column="1"
-                                      MaxWidth="4500"
-                                      CanContentScroll="True"
-                                      x:Name="SongsScrollViewer">
-                            <ItemsPresenter/>
-                        </ScrollViewer>
+                            <ui:Button Margin="0 0 7 0"
+                                       Icon="{ui:SymbolIcon ArrowLeft24}"
+                                       Click="ScrollLeftButtonClick"
+                                       Appearance="Transparent"/>
 
-                        <StackPanel Grid.Column="2"
-                                    Margin="5 0 0 0"
-                                    VerticalAlignment="Center">
-                            <ui:Button Margin="0 0 0 5"
-                                       Click="AddAllToQueueButtonClick"
-                                       ToolTip="{DynamicResource AllToQueueToolTip}"
-                                       Icon="{ui:SymbolIcon Stack24}"
-                                       Appearance="Light"/>
+                            <ScrollViewer Grid.Column="1"
+                                          MaxWidth="4500"
+                                          CanContentScroll="True"
+                                          x:Name="SongsScrollViewer">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
 
-                            <ui:Button Margin="0 0 0 5"
-                                       Click="ReloadButtonClick"
-                                       ToolTip="{DynamicResource ReloadToolTIp}"
-                                       Icon="{ui:SymbolIcon ArrowCounterClockwise24}"
-                                       Appearance="Light"/>
+                            <StackPanel Grid.Column="2"
+                                        Margin="5 0 0 0"
+                                        VerticalAlignment="Center">
+                                <ui:Button Margin="0 0 0 5"
+                                           Click="AddAllToQueueButtonClick"
+                                           ToolTip="{DynamicResource AllToQueueToolTip}"
+                                           Icon="{ui:SymbolIcon Stack24}"
+                                           Appearance="Light"/>
 
-                            <ui:Button Click="LoadMoreButtonClick"
-                                       ToolTip="{DynamicResource LoadMoreToolTip}"
-                                       Icon="{ui:SymbolIcon Add24}"
-                                       Appearance="Light"/>
-                        </StackPanel>
+                                <ui:Button Margin="0 0 0 5"
+                                           Click="ReloadButtonClick"
+                                           ToolTip="{DynamicResource ReloadToolTip}"
+                                           Icon="{ui:SymbolIcon ArrowCounterClockwise24}"
+                                           Appearance="Light"/>
+    
+                                <ui:Button Click="LoadMoreButtonClick"
+                                           ToolTip="{DynamicResource LoadMoreToolTip}"
+                                           Icon="{ui:SymbolIcon Add24}"
+                                           Appearance="Light"/>
+                            </StackPanel>
 
-                        <ui:Button Margin="7 0 0 0"
-                                   Grid.Column="4"
-                                   Click="ScrollRightButtonClick"
-                                   Icon="{ui:SymbolIcon ArrowRight24}"
-                                   Appearance="Transparent"/>
+                            <ui:Button Margin="7 0 0 0"
+                                       Grid.Column="4"
+                                       Click="ScrollRightButtonClick"
+                                       Icon="{ui:SymbolIcon ArrowRight24}"
+                                       Appearance="Transparent"/>
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </ItemsControl.Template>

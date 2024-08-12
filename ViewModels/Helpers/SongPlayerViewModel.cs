@@ -12,6 +12,9 @@ namespace ElementMusic.ViewModels.Helpers
 {
     public partial class SongPlayerViewModel : ObservableObject
     {
+        private const string DURATION_LABEL_PLACEHOLDER =
+            "--:--";
+
         private readonly MediaPlayer _mediaPlayer
             = new();
         private readonly DispatcherTimer _timer =
@@ -25,6 +28,7 @@ namespace ElementMusic.ViewModels.Helpers
             {
                 _currentSong = value;
                 SongLoaded = true;
+                if(value != null) LoadLyrics(value);
                 OnPropertyChanged(nameof(CurrentSong));
             }
         }
@@ -48,15 +52,19 @@ namespace ElementMusic.ViewModels.Helpers
         [ObservableProperty]
         private double _playingProgress;
         [ObservableProperty]
-        private string _playedLabel = "--:--";
+        private string _playedLabel
+            = DURATION_LABEL_PLACEHOLDER;
         [ObservableProperty]
-        private string _durationLabel = "--:--";
+        private string _durationLabel 
+            = DURATION_LABEL_PLACEHOLDER;
         [ObservableProperty]
         private int _volume;
         [ObservableProperty]
         private bool _backwardEnabled;
         [ObservableProperty]
         private bool _forwardEnabled;
+        [ObservableProperty]
+        private bool _enabled;
         [ObservableProperty]
         private bool _repeatSongs;
 
@@ -81,16 +89,21 @@ namespace ElementMusic.ViewModels.Helpers
             _mediaPlayer.MediaOpened += (_, _) =>
             {
                 _timer.Start();
+                Enabled = true;
             };
         }
 
-        private async void LoadLyrics()
+        private async void LoadLyrics(Song song)
         {
+            LyricsDisplayViewModel.Lyrics = null;
+            LyricsDisplayViewModel.NoLyrics = false;
+            LyricsDisplayViewModel.LyricsScroller.ScrollToTop();
+
             var resp = await App.MusixmatchAPISender.SendRequest("getLyricsMusix.php", HttpMethod.Get, new Dictionary<string, object>
             {
-                { "t", CurrentSong.Title },
-                { "a", CurrentSong.Artist },
-                { "d", CurrentSong.Duration },
+                { "t", song.Title },
+                { "a", song.Artist },
+                { "d", song.Duration },
                 { "type", "alternative" }
             });
             var content = await resp.Content.ReadAsStringAsync();
@@ -122,7 +135,11 @@ namespace ElementMusic.ViewModels.Helpers
             {
                 if (RepeatSongs)
                     Skip(_playedSongs.First.Value, false);
-                else Stop();
+                else
+                {
+                    Stop();
+                    LyricsDisplayViewModel.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -197,10 +214,14 @@ namespace ElementMusic.ViewModels.Helpers
         private void Play(object startTimer)
         {
             if (!_paused)
+            {
+                Enabled = false;
+                PlayedLabel = DURATION_LABEL_PLACEHOLDER;
+                DurationLabel = DURATION_LABEL_PLACEHOLDER;
                 _mediaPlayer.Open(new Uri($"https://elemsocial.com/Content/Music/Files/{CurrentSong.File}"));
+            }
             _mediaPlayer.Play();
             if (Convert.ToBoolean(startTimer)) _timer.Start();
-            LoadLyrics();
             Playing = true;
         }
 

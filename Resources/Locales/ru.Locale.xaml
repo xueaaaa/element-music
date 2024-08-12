@@ -33,6 +33,7 @@
     <v:String x:Key="CloseButton">Закрыть</v:String>
 
     <v:String x:Key="SearchButton">Искать</v:String>
+    <v:String x:Key="SongsNotFoundLabel">Песни не найдены</v:String>
     <v:String x:Key="RecentlyAddedHeader">Недавно добавленное</v:String>
     <v:String x:Key="RandomHeader">Случайное</v:String>
     <v:String x:Key="FavoritesHeader">Избранное</v:String>
@@ -40,7 +41,7 @@
     <v:String x:Key="AllToQueueToolTip">Добавить все песни из этого списка в очередь</v:String>
     <v:String x:Key="ReloadToolTip">Перезагрузить</v:String>
     <v:String x:Key="LoadMoreToolTip">Загрузить ещё</v:String>
-    <v:String x:Key="LyricsNotAvaliableLabel">В данный момент текст недоступен.</v:String>
+    <v:String x:Key="LyricsNotAvaliableLabel">Текст этой песни недоступен.</v:String>
 
     <v:String x:Key="TitleToolTip">Название*</v:String>
     <v:String x:Key="AlbumToolTip">Альбом</v:String>
@@ -67,6 +68,7 @@
     <v:String x:Key="SupportMusicCreatorLabel">Поддержать разработчика Element Music</v:String>
     <v:String x:Key="ElementAuthorLabel">Разработчик сети Element</v:String>
     <v:String x:Key="SupportElementAuthorLabel">Поддержать разработчика Element</v:String>
+    <v:String x:Key="ElementMusicElementAccountLabel">Аккаунт Element Music в Element</v:String>
     <v:String x:Key="LegalInfoLabel">Element Music (Windows) не является правообладателем контента, представленного на страницах Главная и Избранное, а лишь предоставляет доступ к материалам, которые уже размещены в Интернете в открытом доступе. Если вы считаете, что ваши авторские права нарушены, напишите на почту elemsupport@proton.me.</v:String>
 
     <v:String x:Key="InfoBarSuccessTitle">Успешно</v:String>

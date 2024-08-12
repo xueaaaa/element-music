@@ -21,7 +21,8 @@ namespace ElementMusic.Views.Controls
             DependencyProperty.Register("Source", typeof(ObservableCollection<Song>), typeof(SongCarousel));
         public static readonly DependencyProperty SongTypeProperty =
             DependencyProperty.Register("SongType", typeof(SongType), typeof(SongCarousel));
-
+        public static readonly DependencyProperty IsSourceLoadingProperty =
+            DependencyProperty.Register("IsSourceLoading", typeof(bool), typeof(SongCarousel));
 
         public SongType SongType
         {
@@ -33,6 +34,12 @@ namespace ElementMusic.Views.Controls
         {
             get => (ObservableCollection<Song>)GetValue(SourceProperty);
             set => SetValue(SourceProperty, value);
+        }
+
+        public bool IsSourceLoading
+        {
+            get => (bool)GetValue(IsSourceLoadingProperty);
+            private set => SetValue(IsSourceLoadingProperty, value);
         }
 
         public SongCarousel()
@@ -48,10 +55,13 @@ namespace ElementMusic.Views.Controls
 
         public async void LoadSongs(bool startsFromLast = false)
         {
+            IsSourceLoading = true;
+
             string f = string.Empty;
             switch (SongType)
             {
                 case SongType.None:
+                    IsSourceLoading = false;
                     return;
                 case SongType.Latest:
                     f = "LATEST";
@@ -83,6 +93,8 @@ namespace ElementMusic.Views.Controls
                 foreach (var item in songs)
                     Source.Add(item);
             else Source = songs;
+
+            IsSourceLoading = false;
         }
 
         private void ScrollLeftButtonClick(object sender, RoutedEventArgs e)

@@ -67,7 +67,6 @@ namespace ElementMusic.ViewModels.Pages
             else
             {
                 SearchedSongs.Clear();
-                SearchedCarouselVisibility = Visibility.Collapsed;
             }
         }
     }

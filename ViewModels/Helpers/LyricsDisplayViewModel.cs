@@ -36,7 +36,8 @@ namespace ElementMusic.ViewModels.Helpers
                     Current = c;
                     c.IsCurrent = true;
                 }
-                else NoLyrics = true;
+                else if(value > new TimeSpan(0, 0, 1)) 
+                    NoLyrics = true;
             }
         }
 

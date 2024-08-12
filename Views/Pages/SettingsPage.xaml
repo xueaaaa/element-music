@@ -93,6 +93,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <TextBlock FontWeight="Bold"
@@ -133,6 +134,16 @@
                                     Content="Element Gold"
                                     Icon="{ui:SymbolIcon Dock24}"
                                     NavigateUri="https://elemsocial.com/goldsub"/>
+
+                <TextBlock Grid.Row="5"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Text="{DynamicResource ElementMusicElementAccountLabel}"/>
+                <ui:HyperlinkButton Grid.Row="5"
+                                    Grid.Column="1"
+                                    Content="Element Music for Windows"
+                                    Icon="{ui:SymbolIcon Dock24}"
+                                    NavigateUri="https://elemsocial.com/profile/elemusic_win"/>
             </Grid>
         </ui:CardExpander>
 

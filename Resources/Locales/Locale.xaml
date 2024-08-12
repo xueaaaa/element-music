@@ -33,6 +33,7 @@
     <v:String x:Key="CloseButton">Close</v:String>
 
     <v:String x:Key="SearchButton">Search</v:String>
+    <v:String x:Key="SongsNotFoundLabel">No songs found</v:String>
     <v:String x:Key="RecentlyAddedHeader">Recently added</v:String>
     <v:String x:Key="RandomHeader">Random</v:String>
     <v:String x:Key="FavoritesHeader">Favorites</v:String>
@@ -40,7 +41,7 @@
     <v:String x:Key="AllToQueueToolTip">Add all songs from this list to the queue</v:String>
     <v:String x:Key="ReloadToolTip">Reload</v:String>
     <v:String x:Key="LoadMoreToolTip">Load more</v:String>
-    <v:String x:Key="LyricsNotAvaliableLabel">Lyrics are not avaliable right now.</v:String>
+    <v:String x:Key="LyricsNotAvaliableLabel">The lyrics to this song are not available.</v:String>
 
     <v:String x:Key="TitleToolTip">Title*</v:String>
     <v:String x:Key="AlbumToolTip">Album</v:String>
@@ -67,6 +68,7 @@
     <v:String x:Key="SupportMusicCreatorLabel">Support the developer Element Music</v:String>
     <v:String x:Key="ElementAuthorLabel">Developer of the Element network</v:String>
     <v:String x:Key="SupportElementAuthorLabel">Support the developer of Element</v:String>
+    <v:String x:Key="ElementMusicElementAccountLabel">Element Music account at Element</v:String>
     <v:String x:Key="LegalInfoLabel">Element Music (Windows) is not the copyright holder of the content presented on the Home and Favorites pages, but only provides access to material that is already publicly available on the Internet. If you believe that your copyright has been violated, please write to elemsupport@proton.me.</v:String>
 
     <v:String x:Key="InfoBarSuccessTitle">Success</v:String>

@@ -26,6 +26,7 @@
                         PlaceholderText="{DynamicResource SearchToolTip}"
                         Icon="{ui:SymbolIcon Search24}"/>
             <c:SongCarousel x:Name="SongCarousel"
+                            Margin="0 10 0 0"
                             SongType="Favorites"/>
         </StackPanel>
 
