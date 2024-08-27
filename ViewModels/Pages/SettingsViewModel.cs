@@ -13,7 +13,7 @@ namespace ElementMusic.ViewModels.Pages
         private bool _isInitialized = false;
 
         [ObservableProperty]
-        private string _appVersion = String.Empty;
+        private string _appVersion = string.Empty;
 
         [ObservableProperty]
         private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
@@ -56,18 +56,57 @@ namespace ElementMusic.ViewModels.Pages
                     OnPropertyChanged(nameof(SelectedLanguage));
                 }
 
-                else if (_selectedLanguage != value && new CultureInfo(_selectedLanguage.Tag) != Properties.Settings.Default.Language)
+                else if (_selectedLanguage != value && new CultureInfo(_selectedLanguage.Tag.ToString()) != Properties.Settings.Default.Language)
                 {
                     _selectedLanguage = value;
-                    var info = new CultureInfo(_selectedLanguage.Tag);
+                    var info = new CultureInfo(_selectedLanguage.Tag.ToString());
                     Localizator.CurrentLanguage = info;
                     OnPropertyChanged(nameof(SelectedLanguage));
                 }
             }
         }
 
+        private ObservableCollection<SettingsParameterViewModel> _visibilities;
+        public ObservableCollection<SettingsParameterViewModel> Visibilities
+        {
+            get
+            {
+                if (_visibilities == null)
+                {
+                    var items = new ObservableCollection<SettingsParameterViewModel>()
+                    {
+                        new() {
+                            DisplayName = $"{Application.Current.Resources["VisibleName"]}",
+                            Tag = Visibility.Visible
+                        },
+
+                        new() {
+                            DisplayName = $"{Application.Current.Resources["CollapsedName"]}",
+                            Tag = Visibility.Collapsed
+                        }
+                    };
+
+                    _visibilities = items;
+                }
+
+                return _visibilities;
+            }
+        }
+
+        private SettingsParameterViewModel _miniLyricsDisplayVisibility;
+        public SettingsParameterViewModel MiniLyricsDisplayVisibility
+        {
+            get => _miniLyricsDisplayVisibility;
+            set
+            {
+                _miniLyricsDisplayVisibility = value;
+                App.GetService<MainWindowViewModel>().SongPlayerViewModel.LyricsDisplayViewModel.MiniLyricsPanelVisibility = (Visibility)value.Tag;
+                OnPropertyChanged(nameof(MiniLyricsDisplayVisibility));
+            }
+        }
+
         [ObservableProperty]
-        private int _volume; 
+        private int _volume;
 
         public void OnNavigatedTo()
         {
@@ -80,18 +119,19 @@ namespace ElementMusic.ViewModels.Pages
         private void InitializeViewModel()
         {
             CurrentTheme = ApplicationThemeManager.GetAppTheme();
-            SelectedLanguage = Languages.Where(l => l.Tag == Properties.Settings.Default.Language.Name).First();
-            AppVersion = $"{GetAssemblyVersion()}";
+            SelectedLanguage = Languages.Where(l => l.Tag.ToString() == Properties.Settings.Default.Language.Name).First();
+            AppVersion = GetAssemblyVersion();
             Volume = Properties.Settings.Default.Volume;
+
+            var savedMLDVisibility = Properties.Settings.Default.MiniLyricsDisplayVisibility;
+            MiniLyricsDisplayVisibility = Visibilities.Where(v => (Visibility)v.Tag == savedMLDVisibility).FirstOrDefault();
 
             _isInitialized = true;
         }
 
-        private string GetAssemblyVersion()
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-                ?? String.Empty;
-        }
+        private static string GetAssemblyVersion() =>
+            System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
+                ?? string.Empty;
 
         [RelayCommand]
         private void OnChangeTheme(string parameter)

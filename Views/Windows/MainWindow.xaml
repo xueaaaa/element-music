@@ -9,6 +9,7 @@
                  xmlns:pages="clr-namespace:ElementMusic.Views.Pages"
                  Title="Element Music"
                  MinWidth="1100"
+                 MinHeight="450"
                  Width="1100"
                  Height="650"
                  d:DataContext="{d:DesignInstance local:MainWindow,
@@ -73,15 +74,39 @@
             <ui:NavigationView.ContentOverlay>
                 <Grid>
                     <ui:SnackbarPresenter x:Name="SnackbarPresenter" />
+
+                    <!--#region MINI LYRICS PANEL -->
+                    <ui:Card VerticalAlignment="Bottom"
+                             HorizontalAlignment="Center"
+                             Margin="0 0 0 7"
+                             Background="#484848"
+                             DataContext="{Binding ViewModel.SongPlayerViewModel.LyricsDisplayViewModel}"
+                             Visibility="{Binding MiniLyricsPanelVisibility}">
+                        <Grid>
+                            <ProgressBar Value="{Binding RemainToStart}"
+                                         Visibility="{Binding RemainToStartBarVisibility}"
+                                         VerticalAlignment="Center"
+                                         MinWidth="450"
+                                         Height="4"
+                                         Minimum="0"
+                                         Maximum="100"/>
+                            <TextBlock Text="{Binding Current.Content}"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       FontSize="24"
+                                       FontWeight="Bold"/>
+                        </Grid>
+                    </ui:Card>
                 </Grid>
+                <!--#endregion-->
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
-        <ContentPresenter x:Name="RootContentDialog"
-                  Grid.Row="0"
-                  Grid.RowSpan="2" />
+            <ContentPresenter x:Name="RootContentDialog"
+                              Grid.Row="0"
+                              Grid.RowSpan="2"/>
 
-        <ui:TitleBar x:Name="TitleBar"
+            <ui:TitleBar x:Name="TitleBar"
                      Title="Element Music"
                      Grid.Row="0"
                      Grid.ColumnSpan="2"
@@ -219,7 +244,7 @@
               DataContext="{Binding ViewModel.SongPlayerViewModel}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
@@ -379,11 +404,13 @@
                         Orientation="Horizontal"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center">
-                <ui:Button Command="{Binding OpenLyricsCommand}"
+                <ui:Button Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ViewModel.SongPlayerViewModel.OpenLyricsCommand}"
+                           DataContext="{Binding LyricsDisplayViewModel.Current}"
                            FontSize="18"
                            Icon="{ui:SymbolIcon TextField24}"
                            Appearance="Transparent"
                            BorderThickness="0"/>
+                
                 <ui:Button Command="{Binding ShowInfoCommand}"
                            Margin="3 0 0 0"
                            FontSize="18"
@@ -481,7 +508,7 @@
                 Grid.Row="2"
                 Width="400"
                 DataContext="{Binding ViewModel.SongPlayerViewModel.LyricsDisplayViewModel}"
-                Visibility="{Binding Visibility}">
+                Visibility="{Binding LyricsPanelVisibility}">
             <ScrollViewer x:Name="LyricsScroller">
                 <StackPanel>
                     <ProgressBar Value="{Binding RemainToStart}"

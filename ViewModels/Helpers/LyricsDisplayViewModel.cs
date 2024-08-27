@@ -1,4 +1,5 @@
 ﻿using ElementMusic.Models.MusixmatchAPI;
+using ElementMusic.ViewModels.Pages;
 using System.Windows.Controls;
 
 namespace ElementMusic.ViewModels.Helpers
@@ -21,6 +22,9 @@ namespace ElementMusic.ViewModels.Helpers
                 if (Lyrics != null && Lyrics.Count > 0)
                 {
                     NoLyrics = false;
+                    if ((Visibility)App.GetService<SettingsViewModel>().MiniLyricsDisplayVisibility.Tag == Visibility.Visible)
+                        MiniLyricsPanelVisibility = Visibility.Visible;
+
                     var first = Lyrics.First();
                     if (_currentPos < first.TimeMark && first.TimeMark > new TimeSpan(0, 0, 3))
                     {
@@ -36,21 +40,27 @@ namespace ElementMusic.ViewModels.Helpers
                     Current = c;
                     c.IsCurrent = true;
                 }
-                else if(value > new TimeSpan(0, 0, 1)) 
+                else if (value > new TimeSpan(0, 0, 1))
+                {
                     NoLyrics = true;
+                    MiniLyricsPanelVisibility = Visibility.Collapsed;
+                }
             }
         }
 
         [ObservableProperty]
         private Lyrics _current;
         [ObservableProperty]
-        private Visibility _visibility = Visibility.Collapsed;
+        private Visibility _lyricsPanelVisibility = Visibility.Collapsed;
+        [ObservableProperty]
+        private Visibility _miniLyricsPanelVisibility = Visibility.Collapsed;
         [ObservableProperty]
         private Visibility _remainToStartBarVisibility = Visibility.Collapsed;
         [ObservableProperty]
         private double _remainToStart;
         [ObservableProperty]
-        private bool _noLyrics;
+        private bool _noLyrics
+            = true;
 
         public ScrollViewer LyricsScroller { get; set; }
     }

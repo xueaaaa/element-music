@@ -60,6 +60,10 @@
     <v:String x:Key="DarkThemeName">Тёмная</v:String>
     <v:String x:Key="LanguageGroupName">Язык</v:String>
     <v:String x:Key="VolumeLabel">Громкость</v:String>
+    <v:String x:Key="MiniLyricsDisplayLabel">Видимость панели текста песни</v:String>
+    <v:String x:Key="VisibleName">Видима</v:String>
+    <v:String x:Key="CollapsedName">Скрыта</v:String>
+    <v:String x:Key="OtherGroupHeader">Прочее</v:String>
     <v:String x:Key="LogoutButton">Выйти</v:String>
     <v:String x:Key="LogoutButtonLabel">Если у вас есть проблемы с загрузкой песен, или вы хотите перезайти с другого аккаунта, воспользуйтесь этой кнопкой.</v:String>
     <v:String x:Key="AboutHeader">Об Element Music</v:String>

@@ -60,6 +60,10 @@
     <v:String x:Key="DarkThemeName">Dark</v:String>
     <v:String x:Key="LanguageGroupName">Language</v:String>
     <v:String x:Key="VolumeLabel">Volume</v:String>
+    <v:String x:Key="MiniLyricsDisplayLabel">Song lyrics panel visibility</v:String>
+    <v:String x:Key="VisibleName">Visible</v:String>
+    <v:String x:Key="CollapsedName">Hidden</v:String>
+    <v:String x:Key="OtherGroupHeader">Other</v:String>
     <v:String x:Key="LogoutButton">Log out</v:String>
     <v:String x:Key="LogoutButtonLabel">If you're having trouble downloading songs, or want to re-login from another account, use this button.</v:String>
     <v:String x:Key="AboutHeader">About Element Music</v:String>

@@ -97,6 +97,7 @@ namespace ElementMusic.ViewModels.Helpers
         {
             LyricsDisplayViewModel.Lyrics = null;
             LyricsDisplayViewModel.NoLyrics = false;
+            LyricsDisplayViewModel.Current = null;
             LyricsDisplayViewModel.LyricsScroller.ScrollToTop();
 
             var resp = await App.MusixmatchAPISender.SendRequest("getLyricsMusix.php", HttpMethod.Get, new Dictionary<string, object>
@@ -138,7 +139,7 @@ namespace ElementMusic.ViewModels.Helpers
                 else
                 {
                     Stop();
-                    LyricsDisplayViewModel.Visibility = Visibility.Collapsed;
+                    LyricsDisplayViewModel.LyricsPanelVisibility = Visibility.Collapsed;
                 }
             }
         }
@@ -269,7 +270,8 @@ namespace ElementMusic.ViewModels.Helpers
 
         [RelayCommand]
         private void OpenLyrics() => 
-            LyricsDisplayViewModel.Visibility = LyricsDisplayViewModel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+            LyricsDisplayViewModel.LyricsPanelVisibility = 
+                LyricsDisplayViewModel.LyricsPanelVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
 
         [RelayCommand]
         private async void ShowInfo()
